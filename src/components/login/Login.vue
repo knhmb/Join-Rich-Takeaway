@@ -51,6 +51,7 @@
       <ForgotPassword v-if="authType === 'forgot-password'" />
       <ResetPassword v-if="authType === 'reset-password'" />
       <CreateAccount v-if="authType === 'create-account'" />
+      <CreateAccountEmail v-if="authType === 'create-account-email'" />
     </el-dialog>
   </div>
 </template>
@@ -59,12 +60,14 @@
 import ForgotPassword from "../forgot-password/ForgotPassword.vue";
 import ResetPassword from "../forgot-password/ResetPassword.vue";
 import CreateAccount from "@/components/register/CreateAccount.vue";
+import CreateAccountEmail from "@/components/register/CreateAccountEmail.vue";
 
 export default {
   components: {
     ForgotPassword,
     ResetPassword,
     CreateAccount,
+    CreateAccountEmail,
   },
   data() {
     return {
@@ -85,6 +88,7 @@ export default {
   methods: {
     closeDialog() {
       this.$store.commit("TOGGLE_AUTH_DIALOG", false);
+      this.$store.commit("TOGGLE_AUTH_TYPE", "login");
     },
     toggleAuth(data) {
       this.$store.commit("TOGGLE_AUTH_TYPE", data);

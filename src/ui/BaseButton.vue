@@ -11,7 +11,7 @@
       class="email"
       src="../assets/email.png"
       alt=""
-      v-if="!isGoogle && !isFacebook"
+      v-if="!isGoogle && !isFacebook && icon"
     />
     <slot></slot>
   </el-button>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ["facebook", "google"],
+  props: ["facebook", "google", "icon"],
   data() {
     return {
       isFacebook: null,

@@ -19,4 +19,8 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  background: #f5f5f5;
+}
 </style>

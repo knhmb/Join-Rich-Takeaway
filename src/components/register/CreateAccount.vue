@@ -7,7 +7,9 @@
     />
     <h2>Create Account</h2>
     <el-form-item>
-      <base-button>Email</base-button>
+      <base-button :icon="true" @click="toggleAuth('create-account-email')"
+        >Email</base-button
+      >
     </el-form-item>
     <el-form-item>
       <el-divider content-position="center">Or</el-divider>

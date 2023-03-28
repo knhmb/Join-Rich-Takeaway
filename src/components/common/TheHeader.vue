@@ -3,7 +3,12 @@
     <base-container>
       <div class="header">
         <div class="left">
-          <img class="logo" src="../../assets/Logo-1-Member.png" alt="" />
+          <img
+            @click="$router.push('/')"
+            class="logo"
+            src="../../assets/Logo-1-Member.png"
+            alt=""
+          />
           <el-input
             :prefix-icon="Search"
             placeholder="Search Restaurant and Product"

@@ -6,6 +6,7 @@
       <WaitingConfirmation />
       <Delivering />
       <PastOrders />
+      <Dialog />
     </base-container>
   </section>
 </template>
@@ -14,12 +15,14 @@
 import WaitingConfirmation from "@/components/order/WaitingConfirmation.vue";
 import Delivering from "@/components/order/Delivering.vue";
 import PastOrders from "@/components/order/PastOrders.vue";
+import Dialog from "@/components/order/Dialog.vue";
 
 export default {
   components: {
     WaitingConfirmation,
     Delivering,
     PastOrders,
+    Dialog,
   },
 };
 </script>

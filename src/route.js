@@ -8,6 +8,8 @@ import Cart2 from "@/pages/Cart2";
 import Order from "@/pages/Order";
 import UserProfile from "@/pages/UserProfile";
 import PersonalInformation from "@/pages/PersonalInformation";
+import ChangePassword from "@/pages/ChangePassword";
+import DeliveryAddress from "@/pages/DeliveryAddress";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -27,6 +29,16 @@ const router = createRouter({
           path: "personal-information",
           component: PersonalInformation,
           name: "personal-information",
+        },
+        {
+          path: "change-password",
+          component: ChangePassword,
+          name: "change-password",
+        },
+        {
+          path: "delivery-address",
+          component: DeliveryAddress,
+          name: "delivery-address",
         },
       ],
     },

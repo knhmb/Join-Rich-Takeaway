@@ -20,10 +20,22 @@
               >
                 <p>Personal information</p>
               </div>
-              <div class="single-item">
+              <div
+                class="single-item"
+                @click="navigate('change-password')"
+                :class="{
+                  'is-selected': $route.name === 'change-password',
+                }"
+              >
                 <p>Change password</p>
               </div>
-              <div class="single-item">
+              <div
+                class="single-item"
+                @click="navigate('delivery-address')"
+                :class="{
+                  'is-selected': $route.name === 'delivery-address',
+                }"
+              >
                 <p>Delivery address</p>
               </div>
               <div class="single-item">

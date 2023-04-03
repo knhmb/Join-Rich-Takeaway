@@ -9,11 +9,13 @@
             src="../../assets/Logo-1-Member.png"
             alt=""
           />
-          <el-input
-            :prefix-icon="Search"
-            placeholder="Search Restaurant and Product"
-          ></el-input>
-          <img src="../../assets/filter.png" class="filter" alt="" />
+          <div class="search">
+            <el-input
+              :prefix-icon="Search"
+              placeholder="Search Restaurant and Product"
+            ></el-input>
+            <img src="../../assets/filter.png" class="filter" alt="" />
+          </div>
         </div>
         <div class="right">
           <el-dropdown trigger="click" popper-class="language">
@@ -145,6 +147,36 @@ header {
   letter-spacing: -0.02em;
   color: #ffffff;
   margin-left: 1rem;
+}
+
+.header div.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 880px) {
+  .header,
+  .header .left {
+    flex-direction: column;
+  }
+
+  .header div.search {
+    margin: 1rem 0;
+  }
+}
+@media screen and (max-width: 430px) {
+  .header div.search {
+    flex-direction: column;
+  }
+
+  .header div.search img {
+    margin-top: 0.5rem;
+  }
+
+  .header .el-input {
+    margin: 0;
+  }
 }
 </style>
 

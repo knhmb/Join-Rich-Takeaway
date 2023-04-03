@@ -4,10 +4,10 @@
     <base-container>
       <h2>Cart</h2>
       <el-row :gutter="35">
-        <el-col :span="16">
+        <el-col :xs="24" :sm="16">
           <Left />
         </el-col>
-        <el-col :span="8">
+        <el-col :xs="24" :sm="8">
           <Right />
         </el-col>
       </el-row>

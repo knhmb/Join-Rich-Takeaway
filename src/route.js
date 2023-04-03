@@ -10,6 +10,8 @@ import UserProfile from "@/pages/UserProfile";
 import PersonalInformation from "@/pages/PersonalInformation";
 import ChangePassword from "@/pages/ChangePassword";
 import DeliveryAddress from "@/pages/DeliveryAddress";
+import Ewallet from "@/pages/Ewallet";
+import Favorites from "@/pages/Favorites";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -39,6 +41,16 @@ const router = createRouter({
           path: "delivery-address",
           component: DeliveryAddress,
           name: "delivery-address",
+        },
+        {
+          path: "e-wallet",
+          component: Ewallet,
+          name: "e-wallet",
+        },
+        {
+          path: "favorites",
+          component: Favorites,
+          name: "favorites",
         },
       ],
     },

@@ -59,9 +59,9 @@ export default {
 </script>
 
 <style scoped>
-.cart-left {
+/* .cart-left {
   height: 100vh;
-}
+} */
 .cart-left h3 {
   font-family: "Inter";
   font-style: normal;

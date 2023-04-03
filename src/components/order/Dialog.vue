@@ -81,4 +81,15 @@ export default {
 .order-dialog p.rider-info {
   color: #141414;
 }
+
+@media screen and (max-width: 635px) {
+  .order-dialog :deep(.el-dialog) {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 445px) {
+  .order-dialog .range {
+    width: 15rem;
+  }
+}
 </style>

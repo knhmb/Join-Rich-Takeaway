@@ -38,5 +38,12 @@
 .cart-right .el-button {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+  white-space: break-spaces;
+}
+
+@media screen and (max-width: 767px) {
+  .cart-right {
+    margin-top: 1rem;
+  }
 }
 </style>

@@ -2,7 +2,7 @@
   <section class="user-profile">
     <base-container>
       <el-row :gutter="35">
-        <el-col :span="8">
+        <el-col :xs="24" :sm="8">
           <base-card>
             <div class="user-content">
               <div class="user-image">
@@ -38,10 +38,22 @@
               >
                 <p>Delivery address</p>
               </div>
-              <div class="single-item">
+              <div
+                class="single-item"
+                @click="navigate('e-wallet')"
+                :class="{
+                  'is-selected': $route.name === 'e-wallet',
+                }"
+              >
                 <p>E-Wallet</p>
               </div>
-              <div class="single-item">
+              <div
+                class="single-item"
+                @click="navigate('favorites')"
+                :class="{
+                  'is-selected': $route.name === 'favorites',
+                }"
+              >
                 <p>Favorites</p>
               </div>
               <div class="single-item">
@@ -53,8 +65,8 @@
             <p>Delete my account</p>
           </base-card>
         </el-col>
-        <el-col :span="16">
-          <router-view></router-view>
+        <el-col :xs="24" :sm="16">
+          <router-view class="user-pages"></router-view>
         </el-col>
       </el-row>
     </base-container>
@@ -155,5 +167,11 @@ export default {
   margin-top: 0;
   text-align: start;
   cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .user-profile .user-pages {
+    margin-top: 1rem;
+  }
 }
 </style>

@@ -2,7 +2,7 @@
 <template>
   <section class="home">
     <base-container>
-      <carousel :items-to-show="3">
+      <carousel :breakpoints="breakpoints">
         <slide v-for="slide in 10" :key="slide">
           <img class="banner" src="../assets/Rectangle-50.png" alt="" />
         </slide>
@@ -32,6 +32,26 @@ export default {
     Popular,
     LowestDelivery,
     Favorites,
+  },
+  data() {
+    return {
+      breakpoints: {
+        300: {
+          itemsToShow: 1,
+          snapAlign: "center",
+        },
+        // 700px and up
+        700: {
+          itemsToShow: 2,
+          snapAlign: "center",
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 3,
+          snapAlign: "start",
+        },
+      },
+    };
   },
   created() {
     this.$store.commit("TOGGLE_AUTH_TYPE", "login");
@@ -67,5 +87,15 @@ export default {
 .home :deep(.carousel__prev--disabled),
 .home :deep(.carousel__next--disabled) {
   display: none;
+}
+
+@media screen and (max-width: 991px) {
+  .home :deep(.carousel__next) {
+    right: -1.5rem;
+  }
+
+  .home :deep(.carousel__prev) {
+    left: -1.5rem;
+  }
 }
 </style>

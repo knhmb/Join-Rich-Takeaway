@@ -2,7 +2,7 @@
 <template>
   <section class="favorites">
     <h2>Favorites</h2>
-    <carousel :items-to-show="1">
+    <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <el-row :gutter="10">
           <el-col :sm="12" :md="6" v-for="item in 8" :key="item">
@@ -36,6 +36,26 @@ export default {
     Slide,
     Navigation,
   },
+  data() {
+    return {
+      breakpoints: {
+        300: {
+          itemsToShow: 1,
+          snapAlign: "center",
+        },
+        // 700px and up
+        700: {
+          itemsToShow: 1,
+          snapAlign: "center",
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 1,
+          snapAlign: "start",
+        },
+      },
+    }
+  }
 };
 </script>
   

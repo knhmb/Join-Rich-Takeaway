@@ -1,7 +1,7 @@
 <template>
   <div class="waiting-confirmation">
     <h4>Waiting for confirmation</h4>
-    <carousel :items-to-show="4">
+    <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <base-card>
           <img src="../../assets/Restaurant.png" alt="" />
@@ -27,6 +27,26 @@ export default {
     Carousel,
     Slide,
     Navigation,
+  },
+  data() {
+    return {
+      breakpoints: {
+        300: {
+          itemsToShow: 1,
+          snapAlign: "center",
+        },
+        // 700px and up
+        700: {
+          itemsToShow: 2,
+          snapAlign: "center",
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 4,
+          snapAlign: "start",
+        },
+      },
+    };
   },
 };
 </script>
@@ -117,5 +137,15 @@ export default {
   width: 100%;
   margin-right: 1rem;
   text-align: start;
+}
+
+@media screen and (max-width: 991px) {
+  .waiting-confirmation :deep(.carousel__next) {
+    right: -1.5rem;
+  }
+
+  .waiting-confirmation :deep(.carousel__prev) {
+    left: -1.5rem;
+  }
 }
 </style>

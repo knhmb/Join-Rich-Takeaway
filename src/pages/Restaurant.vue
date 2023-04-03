@@ -3,11 +3,11 @@
   <section class="restaurant">
     <base-container>
       <el-row :gutter="35">
-        <el-col :span="15">
+        <el-col :xs="24" :sm="15">
           <RestaurantInfo />
           <Popular />
         </el-col>
-        <el-col :span="9">
+        <el-col :xs="24" :sm="9">
           <AddToCart />
         </el-col>
       </el-row>

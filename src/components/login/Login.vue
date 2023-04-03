@@ -163,4 +163,10 @@ export default {
   color: #1c8b71;
   cursor: pointer;
 }
+
+@media screen and (max-width: 430px) {
+  .login :deep(.el-dialog) {
+    width: 90%;
+  }
+}
 </style>

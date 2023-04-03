@@ -37,4 +37,10 @@
   padding-top: 1.3rem;
   padding-bottom: 1.3rem;
 }
+
+@media screen and (max-width: 767px) {
+  .cart-total {
+    margin-top: 1rem;
+  }
+}
 </style>

@@ -178,4 +178,10 @@ export default {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+
+@media screen and (max-width: 767px) {
+  .add-to-cart {
+    margin-top: 1rem;
+  }
+}
 </style>

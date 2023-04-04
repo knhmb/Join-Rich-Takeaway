@@ -5,20 +5,20 @@
       src="../../assets/Arrow-Left.png"
       alt=""
     />
-    <h2>Create Account</h2>
+    <h2>{{ $t("create_account") }}</h2>
     <el-form-item>
-      <base-button :icon="true" @click="toggleAuth('create-account-email')"
-        >Email</base-button
-      >
+      <base-button :icon="true" @click="toggleAuth('create-account-email')">{{
+        $t("email")
+      }}</base-button>
     </el-form-item>
     <el-form-item>
-      <el-divider content-position="center">Or</el-divider>
+      <el-divider content-position="center">{{ $t("or") }}</el-divider>
     </el-form-item>
     <el-form-item>
-      <base-button :facebook="true">Continue with Facebook</base-button>
+      <base-button :facebook="true">{{ $t("continue_facebook") }}</base-button>
     </el-form-item>
     <el-form-item>
-      <base-button :google="true">Continue with Google</base-button>
+      <base-button :google="true">{{ $t("continue_google") }}</base-button>
     </el-form-item>
   </div>
 </template>

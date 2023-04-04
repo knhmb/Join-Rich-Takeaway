@@ -1,7 +1,7 @@
 <template>
   <section class="delivery-address">
     <base-card>
-      <h3>Delivery address</h3>
+      <h3>{{ $t("delivery_address") }}</h3>
       <el-row :gutter="15">
         <el-col v-for="item in info" :key="item" :span="12">
           <div class="inner-card">
@@ -10,8 +10,8 @@
               <div class="more">
                 <img @click="openMore(item)" src="../assets/more.png" alt="" />
                 <div v-if="item.isVisible" class="more-content">
-                  <p>Edit</p>
-                  <p>Delete</p>
+                  <p>{{ $t("edit") }}</p>
+                  <p>{{ $t("delete") }}</p>
                 </div>
               </div>
             </div>
@@ -22,7 +22,9 @@
           </div>
         </el-col>
       </el-row>
-      <base-button @click="dialogVisible = true">Add new address</base-button>
+      <base-button @click="dialogVisible = true">{{
+        $t("add_new_address")
+      }}</base-button>
     </base-card>
     <MapsDialog
       @closedDialog="dialogVisible = $event"

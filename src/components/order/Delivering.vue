@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="Delivering">
-    <h4>Delivering</h4>
+    <h4>{{ $t("delivering") }}</h4>
     <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <base-card>

@@ -1,6 +1,6 @@
 <template>
   <div class="waiting-confirmation">
-    <h4>Waiting for confirmation</h4>
+    <h4>{{ $t("waiting_confirmation") }}</h4>
     <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <base-card>
@@ -8,7 +8,7 @@
           <p class="name">Restaurant name restaurant name...</p>
           <p class="no">#1234<span>•</span>2022-08-11 12:31</p>
           <p class="price">HK$ 98.00</p>
-          <el-button>Cancel order</el-button>
+          <el-button>{{ $t("cancel_order") }}</el-button>
         </base-card>
       </slide>
       <template #addons>

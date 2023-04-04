@@ -3,12 +3,12 @@
   <div class="login">
     <el-dialog v-model="authDialogVisible" @close="closeDialog">
       <template v-if="authType === 'login'">
-        <h2>Login</h2>
+        <h2>{{ $t("login") }}</h2>
         <el-form>
           <el-form-item>
             <base-input
               v-model="ruleForm.username"
-              placeholder="Username"
+              :placeholder="$t('username')"
             ></base-input>
             <!-- <el-input
             placeholder="Username"
@@ -18,32 +18,38 @@
           <el-form-item>
             <base-input
               v-model="ruleForm.password"
-              placeholder="Password"
+              :placeholder="$t('password')"
               type="password"
               show-password
             ></base-input>
           </el-form-item>
           <el-form-item>
             <p class="forgot-password" @click="toggleAuth('forgot-password')">
-              Forgot password ?
+              {{ $t("forgot_password") }} ?
             </p>
           </el-form-item>
           <el-form-item>
-            <base-button>Continue</base-button>
+            <base-button>{{ $t("continue") }}</base-button>
           </el-form-item>
           <el-form-item>
-            <el-divider content-position="center">Or</el-divider>
+            <el-divider content-position="center">{{ $t("or") }}</el-divider>
           </el-form-item>
           <el-form-item>
-            <base-button :facebook="true">Continue with Facebook</base-button>
+            <base-button :facebook="true">{{
+              $t("continue_facebook")
+            }}</base-button>
           </el-form-item>
           <el-form-item>
-            <base-button :google="true">Continue with Google</base-button>
+            <base-button :google="true">{{
+              $t("continue_google")
+            }}</base-button>
           </el-form-item>
           <el-form-item>
             <p class="no-account">
-              Don’t have account yet?
-              <span @click="toggleAuth('create-account')">Sign up</span>
+              {{ $t("no_account") }}?
+              <span @click="toggleAuth('create-account')">{{
+                $t("signup")
+              }}</span>
             </p>
           </el-form-item>
         </el-form>

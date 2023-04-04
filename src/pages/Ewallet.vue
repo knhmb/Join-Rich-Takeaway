@@ -2,9 +2,9 @@
 <template>
   <section class="e-wallet">
     <base-card>
-      <h3>E-Wallet</h3>
+      <h3>{{ $t("e-wallet") }}</h3>
       <p>HK$ 2498.00</p>
-      <base-button>Top up</base-button>
+      <base-button>{{ $t("topup") }}</base-button>
     </base-card>
   </section>
 </template>

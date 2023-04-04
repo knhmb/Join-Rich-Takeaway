@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="past-orders">
-    <h4>Past Orders</h4>
+    <h4>{{ $t("past_orders") }}</h4>
     <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <base-card>
@@ -9,7 +9,7 @@
           <p class="name">Restaurant name restaurant name...</p>
           <p class="no">#1234<span>•</span>2022-08-11 12:31</p>
           <p class="price">HK$ 98.00</p>
-          <el-button>Select items to reorder</el-button>
+          <el-button>{{ $t("select_items_to_reorder") }}</el-button>
         </base-card>
       </slide>
       <template #addons>

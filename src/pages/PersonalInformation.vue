@@ -1,22 +1,22 @@
 <template>
   <section class="personal-information">
     <base-card>
-      <h4>Personal information</h4>
+      <h4>{{ $t("personal_information") }}</h4>
       <el-form label-position="top">
-        <el-form-item label="Username">
+        <el-form-item :label="$t('username')">
           <base-input v-model="ruleForm.username"></base-input>
         </el-form-item>
-        <el-form-item label="Display name">
+        <el-form-item :label="$t('display_name')">
           <base-input v-model="ruleForm.displayName"></base-input>
         </el-form-item>
-        <el-form-item label="Email">
+        <el-form-item :label="$t('email')">
           <base-input v-model="ruleForm.email"></base-input>
         </el-form-item>
-        <el-form-item label="Phone">
+        <el-form-item :label="$t('phone')">
           <base-input v-model="ruleForm.phone"></base-input>
         </el-form-item>
         <el-form-item>
-          <base-button>Save</base-button>
+          <base-button>{{ $t("save") }}</base-button>
         </el-form-item>
       </el-form>
     </base-card>

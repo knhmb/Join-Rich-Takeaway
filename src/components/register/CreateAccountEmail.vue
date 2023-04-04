@@ -5,46 +5,49 @@
       src="../../assets/Arrow-Left.png"
       alt=""
     />
-    <h2>Create Account</h2>
+    <h2>{{ $t("create_account") }}</h2>
     <el-form>
       <el-form-item>
         <base-input
           v-model="ruleForm.username"
-          placeholder="Username"
+          :placeholder="$t('username')"
         ></base-input>
       </el-form-item>
       <el-form-item>
         <base-input
           v-model="ruleForm.displayName"
-          placeholder="Display Name"
+          :placeholder="$t('display_name')"
         ></base-input>
       </el-form-item>
       <el-form-item>
         <div class="with-text">
-          <p>Send OTP</p>
-          <base-input v-model="ruleForm.email" placeholder="Email"></base-input>
+          <p>{{ $t("send_otp") }}</p>
+          <base-input
+            v-model="ruleForm.email"
+            :placeholder="$t('email')"
+          ></base-input>
         </div>
       </el-form-item>
       <el-form-item>
         <base-input
           v-model="ruleForm.emailOTP"
-          placeholder="Email OTP"
+          :placeholder="$t('email_otp')"
         ></base-input>
       </el-form-item>
       <el-form-item>
         <base-input
           v-model="ruleForm.password"
-          placeholder="Password"
+          :placeholder="$t('password')"
         ></base-input>
       </el-form-item>
       <el-form-item>
         <base-input
           v-model="ruleForm.confirmPassword"
-          placeholder="Confirm Password"
+          :placeholder="$t('confirm_password')"
         ></base-input>
       </el-form-item>
       <el-form-item>
-        <base-button>Continue</base-button>
+        <base-button>{{ $t("continue") }}</base-button>
       </el-form-item>
     </el-form>
   </div>

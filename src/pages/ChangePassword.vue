@@ -1,28 +1,28 @@
 <template>
   <section class="change-password">
     <base-card>
-      <h4>Change Password</h4>
+      <h4>{{ $t("change_password") }}</h4>
       <el-form label-position="top">
-        <el-form-item label="Old Password">
+        <el-form-item :label="$t('old_password')">
           <base-input
             type="password"
             v-model="ruleForm.oldPassword"
           ></base-input>
         </el-form-item>
-        <el-form-item label="New Password">
+        <el-form-item :label="$t('new_password')">
           <base-input
             type="password"
             v-model="ruleForm.newPassword"
           ></base-input>
         </el-form-item>
-        <el-form-item label="Confirm New Password">
+        <el-form-item :label="$t('confirm_new_password')">
           <base-input
             type="password"
             v-model="ruleForm.confirmNewPassword"
           ></base-input>
         </el-form-item>
         <el-form-item>
-          <base-button>Save</base-button>
+          <base-button>{{ $t("save") }}</base-button>
         </el-form-item>
       </el-form>
     </base-card>

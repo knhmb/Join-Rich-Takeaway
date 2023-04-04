@@ -5,21 +5,24 @@
       src="../../assets/Arrow-Left.png"
       alt=""
     />
-    <h2>Forgot Password</h2>
+    <h2>{{ $t("forgot_password") }}</h2>
     <el-form>
       <el-form-item>
         <base-input
           v-model="ruleForm.username"
-          placeholder="Username"
+          :placeholder="$t('username')"
         ></base-input>
       </el-form-item>
       <el-form-item>
-        <base-input v-model="ruleForm.email" placeholder="Email"></base-input>
+        <base-input
+          v-model="ruleForm.email"
+          :placeholder="$t('email')"
+        ></base-input>
       </el-form-item>
       <el-form-item>
-        <base-button @click="toggleAuth('reset-password')"
-          >Continue</base-button
-        >
+        <base-button @click="toggleAuth('reset-password')">{{
+          $t("continue")
+        }}</base-button>
       </el-form-item>
     </el-form>
   </div>

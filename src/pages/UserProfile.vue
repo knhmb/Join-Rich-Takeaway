@@ -18,7 +18,7 @@
                   'is-selected': $route.name === 'personal-information',
                 }"
               >
-                <p>Personal information</p>
+                <p>{{ $t("personal_information") }}</p>
               </div>
               <div
                 class="single-item"
@@ -27,7 +27,7 @@
                   'is-selected': $route.name === 'change-password',
                 }"
               >
-                <p>Change password</p>
+                <p>{{ $t("change_password") }}</p>
               </div>
               <div
                 class="single-item"
@@ -36,7 +36,7 @@
                   'is-selected': $route.name === 'delivery-address',
                 }"
               >
-                <p>Delivery address</p>
+                <p>{{ $t("delivery_address") }}</p>
               </div>
               <div
                 class="single-item"
@@ -45,7 +45,7 @@
                   'is-selected': $route.name === 'e-wallet',
                 }"
               >
-                <p>E-Wallet</p>
+                <p>{{ $t("e-wallet") }}</p>
               </div>
               <div
                 class="single-item"
@@ -54,15 +54,15 @@
                   'is-selected': $route.name === 'favorites',
                 }"
               >
-                <p>Favorites</p>
+                <p>{{ $t("favorites") }}</p>
               </div>
               <div class="single-item">
-                <p>Logout</p>
+                <p>{{ $t("logout") }}</p>
               </div>
             </div>
           </base-card>
           <base-card class="delete-box">
-            <p>Delete my account</p>
+            <p>{{ $t("delete_my_account") }}</p>
           </base-card>
         </el-col>
         <el-col :xs="24" :sm="16">

@@ -2,7 +2,7 @@
 <template>
   <section class="favorites">
     <base-card>
-      <h3>Favorites</h3>
+      <h3>{{ $t("favorites") }}</h3>
       <el-row :gutter="10">
         <el-col :xs="24" :sm="12" v-for="item in 8" :key="item">
           <div class="inner-card">

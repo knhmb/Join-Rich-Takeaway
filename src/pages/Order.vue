@@ -2,7 +2,7 @@
 <template>
   <section class="order">
     <base-container>
-      <h2>Order</h2>
+      <h2>{{ $t("order") }}</h2>
       <WaitingConfirmation />
       <Delivering />
       <PastOrders />

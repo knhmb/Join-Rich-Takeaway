@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="map">
-    <h3>Add a new address</h3>
+    <h3>{{ $t("add_a_new_address") }}</h3>
 
     <GoogleMap
       api-key="AIzaSyA_C47k8nUTryyy5VSf-ddIIKVPyLrQ0R4"
@@ -21,25 +21,30 @@
       </div>
     </div>
     <template v-if="currentStep === 1">
-      <input type="text" placeholder="Enter your address" ref="origin" />
-      <base-button @click="saveLocation">Add address details</base-button>
+      <input type="text" :placeholder="$t('enter_your_address')" ref="origin" />
+      <base-button @click="saveLocation">{{
+        $t("add_address_details")
+      }}</base-button>
     </template>
     <template v-else>
       <el-row :gutter="15">
         <el-col :span="12">
-          <el-input v-model="unit" placeholder="Floor / Unit"></el-input>
+          <el-input v-model="unit" :placeholder="$t('floor_unit')"></el-input>
         </el-col>
         <el-col :span="12">
           <el-input
             v-model="block"
-            placeholder="Phase / Block / State"
+            :placeholder="$t('phase_block_state')"
           ></el-input>
         </el-col>
         <el-col :span="24">
-          <el-input v-model="addressName" placeholder="Address name"></el-input>
+          <el-input
+            v-model="addressName"
+            :placeholder="$t('address_name')"
+          ></el-input>
         </el-col>
       </el-row>
-      <base-button @click="saveAddress">Save and continue</base-button>
+      <base-button @click="saveAddress">{{ $t("save_continue") }}</base-button>
     </template>
   </div>
 </template>
@@ -107,7 +112,7 @@ export default {
       if ([this.unit, this.block, this.addressName].includes("")) {
         ElNotification({
           title: "Error",
-          message: "Please fill all the fields!",
+          message: this.$t('fill_all_fields'),
           type: "error",
         });
         return;

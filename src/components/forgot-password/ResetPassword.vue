@@ -5,22 +5,22 @@
       src="../../assets/Arrow-Left.png"
       alt=""
     />
-    <h2>Reset Password</h2>
+    <h2>{{ $t("reset_password") }}</h2>
     <el-form>
       <el-form-item>
         <base-input
           v-model="ruleForm.newPassword"
-          placeholder="New Password"
+          :placeholder="$t('new_password')"
         ></base-input>
       </el-form-item>
       <el-form-item>
         <base-input
           v-model="ruleForm.confirmNewPassword"
-          placeholder="Confirm New Password"
+          :placeholder="$t('confirm_new_password')"
         ></base-input>
       </el-form-item>
       <el-form-item>
-        <base-button>Reset Password</base-button>
+        <base-button>{{ $t("reset_password") }}</base-button>
       </el-form-item>
     </el-form>
   </div>

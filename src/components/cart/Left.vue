@@ -4,7 +4,7 @@
     <base-card>
       <h3>Papadam Indian Authentic</h3>
       <div class="info">
-        <p>Delivery Time</p>
+        <p>{{ $t("delivery_time") }}</p>
         <p>ASAP (40min)</p>
       </div>
       <div class="item">
@@ -37,11 +37,11 @@
           <p class="discount">HK$ 58.0</p>
         </div>
       </div>
-      <p class="add-more">Add more items</p>
+      <p class="add-more">{{ $t("add_more_items") }}</p>
     </base-card>
     <base-card>
       <div class="total">
-        <p>Subtotal</p>
+        <p>{{ $t("subtotal") }}</p>
         <p>HK$ 174.0</p>
       </div>
     </base-card>

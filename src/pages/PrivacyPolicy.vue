@@ -1,7 +1,7 @@
 <template>
   <section class="privacy-policy">
     <base-container>
-      <h2>Privacy Policy</h2>
+      <h2>{{ $t("privacy_policy") }}</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur. Magna porttitor nulla
         scelerisque sed bibendum. In ut amet arcu eget. Etiam etiam proin
@@ -46,6 +46,10 @@
 </template>
 
 <style scoped>
+.privacy-policy {
+  height: 100vh;
+}
+
 .privacy-policy h2 {
   font-family: "Inter";
   font-style: normal;

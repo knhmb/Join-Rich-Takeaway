@@ -12,27 +12,35 @@
           <div class="search">
             <el-input
               :prefix-icon="Search"
-              placeholder="Search Restaurant and Product"
+              :placeholder="$t('search_restaurant_product')"
             ></el-input>
             <img src="../../assets/filter.png" class="filter" alt="" />
           </div>
         </div>
         <div class="right">
-          <el-dropdown trigger="click" popper-class="language">
+          <el-dropdown
+            trigger="click"
+            popper-class="language"
+            v-model="$i18n.locale"
+          >
             <span class="el-dropdown-link">
-              English
+              {{ $i18n.locale === "en" ? "English" : "Chinese" }}
               <el-icon class="el-icon--right">
                 <ArrowDown />
               </el-icon>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>English</el-dropdown-item>
-                <el-dropdown-item>Chinese</el-dropdown-item>
+                <el-dropdown-item @click="setLang('en')"
+                  >English</el-dropdown-item
+                >
+                <el-dropdown-item @click="setLang('zh')"
+                  >Chinese</el-dropdown-item
+                >
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <el-button @click="openAuthDialog"> Login </el-button>
+          <el-button @click="openAuthDialog"> {{ $t("login") }} </el-button>
         </div>
       </div>
     </base-container>
@@ -57,6 +65,9 @@ export default {
   methods: {
     openAuthDialog() {
       this.$store.commit("TOGGLE_AUTH_DIALOG", true);
+    },
+    setLang(option) {
+      this.$i18n.locale = option;
     },
   },
 };

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="popular">
-    <h2>Popular Near You</h2>
+    <h2>{{ $t("popular_near_you") }}</h2>
     <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <el-row :gutter="10">

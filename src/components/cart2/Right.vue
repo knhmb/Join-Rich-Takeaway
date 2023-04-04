@@ -2,9 +2,9 @@
 <template>
   <div class="cart-total">
     <base-card>
-      <p>Total</p>
+      <p>{{ $t("total") }}</p>
       <p>HK$ 189.0</p>
-      <base-button>Checkout</base-button>
+      <base-button>{{ $t("checkout") }}</base-button>
     </base-card>
   </div>
 </template>

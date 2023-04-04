@@ -2,7 +2,7 @@
   <div class="delivery-address">
     <base-card>
       <div class="top">
-        <h4>Delivery address</h4>
+        <h4>{{ $t("delivery_address") }}</h4>
         <img src="../../assets/edit.png" alt="" />
       </div>
       <p class="name">Address name</p>

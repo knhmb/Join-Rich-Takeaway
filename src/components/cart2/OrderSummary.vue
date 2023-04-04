@@ -1,7 +1,7 @@
 <template>
   <div class="order-summary">
     <base-card>
-      <h4>Order summary</h4>
+      <h4>{{ $t("order_summary") }}</h4>
       <div class="first-section">
         <div class="item">
           <div class="top">
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="total">
-        <p>Total</p>
+        <p>{{ $t("total") }}</p>
         <p>HK$ 189.0</p>
       </div>
     </base-card>

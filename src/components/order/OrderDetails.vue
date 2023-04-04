@@ -1,18 +1,18 @@
 <template>
   <div class="order-details">
     <div class="box">
-      <h4>Order Details</h4>
+      <h4>{{ $t("order_details") }}</h4>
       <div class="order-info">
         <div class="single-info">
-          <p>Your order number:</p>
+          <p>{{ $t("order_number") }}:</p>
           <div class="pill">#1234</div>
         </div>
         <div class="single-info">
-          <p>Your order from:</p>
+          <p>{{ $t("order_from") }}:</p>
           <p class="dark">Papadam Indian Authentic</p>
         </div>
         <div class="single-info">
-          <p>Delivery address::</p>
+          <p>{{ $t("delivery_address") }}:</p>
           <p class="dark">
             Address detail lorem ipsum dolor sit amet, consectetur adipiscing
             elit...
@@ -57,16 +57,16 @@
         </div>
         <div class="second-section">
           <div class="subtotal">
-            <p class="grey">Subtotal</p>
+            <p class="grey">{{ $t("subtotal") }}</p>
             <p class="grey">HK$ 174.0</p>
           </div>
           <div class="delivery-fee">
-            <p class="grey">Delivery fee</p>
+            <p class="grey">{{ $t("delivery_fee") }}</p>
             <p class="grey">HK$ 15.0</p>
           </div>
         </div>
         <div class="total">
-          <p>Total</p>
+          <p>{{ $t("total") }}</p>
           <p>HK$ 189.0</p>
         </div>
       </div>

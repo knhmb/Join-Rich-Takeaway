@@ -3,7 +3,7 @@
     <base-card>
       <h3>Papadam Indian Authentic</h3>
       <div class="info">
-        <p>Delivery Time</p>
+        <p>{{ $t("delivery_time") }}</p>
         <p>ASAP (40min)</p>
       </div>
       <div class="item">
@@ -37,10 +37,10 @@
         </div>
       </div>
       <div class="total">
-        <p>Subtotal</p>
+        <p>{{ $t("subtotal") }}</p>
         <p>HK$ 174.0</p>
       </div>
-      <base-button>Add to cart</base-button>
+      <base-button>{{ $t("add_to_cart") }}</base-button>
     </base-card>
   </div>
 </template>

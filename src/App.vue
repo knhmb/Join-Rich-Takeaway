@@ -25,6 +25,5 @@ export default {
 
 body {
   background: #f5f5f5;
-  /* min-height: 100vh; */
 }
 </style>

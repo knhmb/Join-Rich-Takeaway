@@ -9,6 +9,8 @@ import "element-plus/dist/index.css";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
 import Vue3Geolocation from "vue3-geolocation";
 
+import i18n from "./i18n";
+
 import BaseContainer from "@/ui/BaseContainer.vue";
 import BaseButton from "@/ui/BaseButton.vue";
 import BaseInput from "@/ui/BaseInput.vue";
@@ -25,6 +27,7 @@ app.use(ElementPlus);
 app.use(store);
 app.use(router);
 app.use(Vue3Geolocation);
+app.use(i18n);
 app.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyA_C47k8nUTryyy5VSf-ddIIKVPyLrQ0R4",

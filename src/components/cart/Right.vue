@@ -2,9 +2,9 @@
 <template>
   <div class="cart-right">
     <base-card>
-      <p class="subtotal">Subtotal</p>
+      <p class="subtotal">{{ $t("subtotal") }}</p>
       <p class="price">HK$ 174.0</p>
-      <base-button>Select address and payment</base-button>
+      <base-button>{{ $t("select_address_payment") }}</base-button>
     </base-card>
   </div>
 </template>

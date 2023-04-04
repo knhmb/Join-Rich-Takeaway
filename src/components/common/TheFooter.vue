@@ -2,7 +2,9 @@
   <footer>
     <base-container>
       <p>Join Rich International Limited</p>
-      <p class="right">Privacy Policy</p>
+      <p @click="$router.push('privacy-policy')" class="right">
+        {{ $t("privacy_policy") }}
+      </p>
     </base-container>
   </footer>
 </template>
@@ -30,5 +32,6 @@ footer p {
 
 footer p.right {
   font-weight: 400;
+  cursor: pointer;
 }
 </style>

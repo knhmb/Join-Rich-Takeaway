@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="popular">
-    <h3>Popular</h3>
+    <h3>{{ $t("popular") }}</h3>
     <base-card>
       <div class="item">
         <div class="text">

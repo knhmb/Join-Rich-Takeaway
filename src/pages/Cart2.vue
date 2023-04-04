@@ -2,7 +2,7 @@
 <template>
   <section class="cart-2">
     <base-container>
-      <h2>Cart</h2>
+      <h2>{{ $t("cart") }}</h2>
       <el-row :gutter="30">
         <el-col :xs="24" :sm="16">
           <DeliveryAddress />

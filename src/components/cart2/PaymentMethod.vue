@@ -1,33 +1,33 @@
 <template>
   <div class="payment-method">
     <base-card>
-      <h4>Payment method</h4>
+      <h4>{{ $t("payment_method") }}</h4>
       <div class="payment-selection-content">
         <div
           class="item"
           @click="setOption('cash')"
           :class="{ 'is-selected': currentOption === 'cash' }"
         >
-          Cash
+          {{ $t("cash") }}
         </div>
         <div
           class="item"
           @click="setOption('stripe')"
           :class="{ 'is-selected': currentOption === 'stripe' }"
         >
-          Stripe
+          {{ $t("stripe") }}
         </div>
         <div
           class="item"
           @click="setOption('ewallet')"
           :class="{ 'is-selected': currentOption === 'ewallet' }"
         >
-          E-Wallet
+          {{ $t("e-wallet") }}
         </div>
       </div>
       <div class="promotion-code-content">
         <img src="../../assets/coupon.png" alt="" />
-        <p class="promotion-code">Use promotion code</p>
+        <p class="promotion-code">{{ $t("use_promotion_code") }}</p>
       </div>
     </base-card>
   </div>

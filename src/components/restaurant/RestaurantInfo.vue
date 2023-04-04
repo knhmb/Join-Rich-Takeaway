@@ -14,7 +14,7 @@
             <img src="../../assets/Phone.png" alt="" />
           </div>
           <div class="text">
-            <p>Phone</p>
+            <p>{{ $t("phone") }}</p>
             <p>9876 1234</p>
           </div>
         </div>
@@ -25,7 +25,7 @@
             <img src="../../assets/Hours.png" alt="" />
           </div>
           <div class="text">
-            <p>Opening hours</p>
+            <p>{{ $t("opening_hours") }}</p>
             <p>Monday - Sunday 08:30 - 21:00</p>
           </div>
         </div>
@@ -36,7 +36,7 @@
             <img src="../../assets/Address.png" alt="" />
           </div>
           <div class="text">
-            <p>Address</p>
+            <p>{{ $t("address") }}</p>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit Fusce
               vulputate gravida est

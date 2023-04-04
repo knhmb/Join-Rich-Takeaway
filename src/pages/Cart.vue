@@ -2,7 +2,7 @@
 <template>
   <section class="cart">
     <base-container>
-      <h2>Cart</h2>
+      <h2>{{ $t("cart") }}</h2>
       <el-row :gutter="35">
         <el-col :xs="24" :sm="16">
           <Left />
@@ -30,6 +30,7 @@ export default {
 <style scoped>
 .cart {
   margin-top: 1rem;
+  height: 100vh;
 }
 
 .cart h2 {

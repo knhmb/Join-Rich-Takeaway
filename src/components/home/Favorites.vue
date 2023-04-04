@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="favorites">
-    <h2>Favorites</h2>
+    <h2>{{ $t("favorites") }}</h2>
     <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
         <el-row :gutter="10">
@@ -54,8 +54,8 @@ export default {
           snapAlign: "start",
         },
       },
-    }
-  }
+    };
+  },
 };
 </script>
   

@@ -3,12 +3,12 @@
   <div class="order-dialog">
     <el-dialog v-model="dialogVisible">
       <div class="box">
-        <p>Estimated delivery time</p>
+        <p>{{ $t("estimated_delivery_time") }}</p>
         <p class="time">11:30 - 11:45</p>
         <div class="range">
           <div class="inner-range"></div>
         </div>
-        <p class="rider-info">Your rider has picked up your food.</p>
+        <p class="rider-info">{{ $t("rider_picked_food") }}</p>
       </div>
       <OrderDetails />
     </el-dialog>

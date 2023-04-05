@@ -71,5 +71,10 @@
   "password": "Password",
   "confirm_password": "Confirm password",
   "or": "Or",
-  "create_account": "Create Account"
+  "create_account": "Create Account",
+  "apply": "Apply",
+  "filter": "Filter",
+  "restaurant_distance": "Restaurant Distance",
+  "restaurant_type": "Restaurant Type",
+  "select_restaurant_type": "Select Restaurant Type"
 }

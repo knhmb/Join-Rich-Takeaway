@@ -14,7 +14,12 @@
               :prefix-icon="Search"
               :placeholder="$t('search_restaurant_product')"
             ></el-input>
-            <img src="../../assets/filter.png" class="filter" alt="" />
+            <img
+              @click="filterDialog = true"
+              src="../../assets/filter.png"
+              class="filter"
+              alt=""
+            />
           </div>
         </div>
         <div class="right">
@@ -46,20 +51,27 @@
     </base-container>
   </header>
   <Login />
+  <FilterDialog
+    @closedDialog="filterDialog = $event"
+    :filter-dialog="filterDialog"
+  />
 </template>
 
 <script>
 import { Search, ArrowDown } from "@element-plus/icons-vue";
 import Login from "../login/Login.vue";
+import FilterDialog from "@/components/FilterDialog.vue";
 
 export default {
   components: {
     ArrowDown,
     Login,
+    FilterDialog,
   },
   data() {
     return {
       Search,
+      filterDialog: false,
     };
   },
   methods: {

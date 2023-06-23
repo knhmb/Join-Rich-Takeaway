@@ -4,8 +4,8 @@
     <el-dialog v-model="authDialogVisible" @close="closeDialog">
       <template v-if="authType === 'login'">
         <h2>{{ $t("login") }}</h2>
-        <el-form>
-          <el-form-item>
+        <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef">
+          <el-form-item prop="username">
             <base-input
               v-model="ruleForm.username"
               :placeholder="$t('username')"
@@ -15,7 +15,7 @@
             v-model="ruleForm.username"
           ></el-input> -->
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <base-input
               v-model="ruleForm.password"
               :placeholder="$t('password')"
@@ -29,7 +29,7 @@
             </p>
           </el-form-item>
           <el-form-item>
-            <base-button>{{ $t("continue") }}</base-button>
+            <base-button @click="login">{{ $t("continue") }}</base-button>
           </el-form-item>
           <el-form-item>
             <el-divider content-position="center">{{ $t("or") }}</el-divider>
@@ -81,6 +81,14 @@ export default {
         username: "",
         password: "",
       },
+      rules: {
+        username: [
+          { required: true, message: "Username is required!", trigger: "blur" },
+        ],
+        password: [
+          { required: true, message: "Password is required!", trigger: "blur" },
+        ],
+      },
     };
   },
   computed: {
@@ -98,6 +106,17 @@ export default {
     },
     toggleAuth(data) {
       this.$store.commit("TOGGLE_AUTH_TYPE", data);
+    },
+    login() {
+      this.$refs.ruleFormRef.validate((valid) => {
+        if (valid) {
+          const data = {
+            username: this.ruleForm.username,
+            password: this.ruleForm.password,
+          };
+          console.log(data);
+        }
+      });
     },
   },
 };

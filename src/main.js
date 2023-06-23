@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import store from "./store/store";
 import router from "./route";
+import "@/axios";
 
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";

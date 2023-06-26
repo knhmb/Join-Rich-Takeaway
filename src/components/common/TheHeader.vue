@@ -36,7 +36,7 @@
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item @click="setLang('en')"
+                <el-dropdown-item @click="setLang('en-US')"
                   >English</el-dropdown-item
                 >
                 <el-dropdown-item @click="setLang('zh')"
@@ -143,7 +143,7 @@ header {
   letter-spacing: -0.02em;
   color: #141414;
   cursor: pointer;
-  width: 6rem;
+  min-width: 6rem;
   height: inherit;
 }
 

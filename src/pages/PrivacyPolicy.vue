@@ -1,7 +1,13 @@
 <template>
   <section class="privacy-policy">
     <base-container>
-      <h2>{{ $t("privacy_policy") }}</h2>
+      <template v-for="content in cmsContents" :key="content.id">
+        <template v-if="content.slug === 'page-privacy-policy'">
+          <h2>{{ content.title }}</h2>
+          <div v-html="content.content"></div>
+        </template>
+      </template>
+      <!-- <h2>{{ $t("privacy_policy") }}</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur. Magna porttitor nulla
         scelerisque sed bibendum. In ut amet arcu eget. Etiam etiam proin
@@ -40,10 +46,23 @@
         felis risus orci in. Tortor magna et cursus volutpat lorem adipiscing
         cursus ultrices. Ipsum consectetur pellentesque consequat mauris integer
         lectus. Nunc tempor ultrices ac purus.
-      </p>
+      </p> -->
     </base-container>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    cmsContents() {
+      return this.$store.getters["dashboard/cmsContents"];
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getCmsContent");
+  },
+};
+</script>
 
 <style scoped>
 .privacy-policy {

@@ -3,7 +3,7 @@
   <section class="lowest-delivery">
     <h2>{{ $t("lowest_delivery_fee") }}</h2>
     <carousel :breakpoints="breakpoints">
-      <slide v-for="slide in 10" :key="slide">
+      <slide v-for="restaurant in restaurants" :key="restaurant">
         <el-row :gutter="10">
           <el-col :sm="12" :md="6" v-for="item in 8" :key="item">
             <base-card>
@@ -55,6 +55,14 @@ export default {
         },
       },
     };
+  },
+  computed: {
+    restaurants() {
+      return this.$store.getters["dashboard/restaurants"];
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getRestaurants");
   },
 };
 </script>

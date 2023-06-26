@@ -78,6 +78,19 @@
   </section>
 </template>
 
+<script>
+export default {
+  computed: {
+    products() {
+      return this.$store.getters["dashboard/products"];
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getProducts");
+  },
+};
+</script>
+
 <style scoped>
 .popular h3 {
   font-family: "Inter";

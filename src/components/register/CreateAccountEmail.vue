@@ -140,6 +140,7 @@ export default {
                 type: "success",
               });
               this.$store.commit("TOGGLE_AUTH_TYPE", "login");
+              this.$refs.ruleFormRef.resetFields();
             })
             .catch((err) => {
               ElNotification({

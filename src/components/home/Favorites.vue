@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="favorites">
+  <section class="favorites" v-if="isLoggedIn">
     <h2>{{ $t("favorites") }}</h2>
     <carousel :breakpoints="breakpoints">
       <slide v-for="slide in 10" :key="slide">
@@ -55,6 +55,11 @@ export default {
         },
       },
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
   },
 };
 </script>

@@ -3,10 +3,10 @@ import en from "@/locale/en.json";
 import zh from "@/locale/zh.json";
 
 const i18n = createI18n({
-  locale: "en",
+  locale: "en-US",
   allowComposition: true, // you need to specify that!
   messages: {
-    en: en,
+    "en-US": en,
     zh: zh,
   },
 });

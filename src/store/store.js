@@ -3,6 +3,7 @@ import actions from "@/store/actions";
 import mutations from "@/store/mutations";
 import getters from "@/store/getters";
 import authModule from "./modules/auth";
+import dashboardModule from "./modules/dashboard";
 
 const store = createStore({
   state() {
@@ -16,6 +17,7 @@ const store = createStore({
   actions,
   modules: {
     auth: authModule,
+    dashboard: dashboardModule,
   },
 });
 

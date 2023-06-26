@@ -3,8 +3,8 @@
   <section class="home">
     <base-container>
       <carousel :breakpoints="breakpoints">
-        <slide v-for="slide in 10" :key="slide">
-          <img class="banner" src="../assets/Rectangle-50.png" alt="" />
+        <slide v-for="banner in banners" :key="banner">
+          <img class="banner" :src="banner.thumbnail" alt="" />
         </slide>
         <template #addons>
           <navigation />
@@ -53,13 +53,23 @@ export default {
       },
     };
   },
+  computed: {
+    banners() {
+      return this.$store.getters["dashboard/banners"];
+    },
+  },
   created() {
     this.$store.commit("TOGGLE_AUTH_TYPE", "login");
+    this.$store.dispatch("dashboard/getBanners");
   },
 };
 </script>
 
 <style scoped>
+.home {
+  min-height: 83vh;
+}
+
 .home .carousel {
   margin-top: 1rem;
 }

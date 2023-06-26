@@ -150,7 +150,7 @@ export default {
   border: none;
   box-shadow: 0 0 0 1px var(--el-input-border-color, var(--el-border-color))
     inset;
-  padding: 0.7rem 1.5rem;
+  padding: 0.7rem 1rem;
   outline: none;
   width: 100%;
   /* margin-top: 1rem; */

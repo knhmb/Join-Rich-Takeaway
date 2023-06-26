@@ -6,7 +6,10 @@ export default {
   namespaced: true,
   state() {
     return {
-      isLoggedIn: false,
+      banners: [],
+      cmsContents: [],
+      restaurants: [],
+      products: [],
     };
   },
   getters,

@@ -72,6 +72,7 @@ export default {
     // },
     addMarker() {
       if (this.currentPlace) {
+        console.log(this.currentPlace);
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng(),

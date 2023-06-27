@@ -3,7 +3,18 @@
     <base-card>
       <h4>{{ $t("order_summary") }}</h4>
       <div class="first-section">
-        <div class="item">
+        <div class="item" v-for="item in products" :key="item.id">
+          <div class="top">
+            <div class="left">
+              <span>{{ item.quantity }}x</span>
+              <span>{{ item.name }}</span>
+            </div>
+            <div class="right">
+              <p>HK$ {{ item.price - item.discount }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="item">
           <div class="top">
             <div class="left">
               <span>1x</span>
@@ -24,36 +35,44 @@
               <p>HK$ 58.0</p>
             </div>
           </div>
-        </div>
-        <div class="item">
-          <div class="top">
-            <div class="left">
-              <span>1x</span>
-              <span>Product name</span>
-            </div>
-            <div class="right">
-              <p>HK$ 58.0</p>
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
       <div class="second-section">
         <div class="subtotal">
           <p class="grey">Subtotal</p>
-          <p class="grey">HK$ 174.0</p>
+          <p class="grey">HK$ {{ totalPrice }}</p>
         </div>
         <div class="delivery-fee">
           <p class="grey">Delivery fee</p>
-          <p class="grey">HK$ 15.0</p>
+          <p class="grey">HK$ {{ products[0].deliveryFee }}</p>
         </div>
       </div>
       <div class="total">
         <p>{{ $t("total") }}</p>
-        <p>HK$ 189.0</p>
+        <p>HK$ {{ totalPrice + products[0].deliveryFee }}</p>
       </div>
     </base-card>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    selectedProducts() {
+      return this.$store.getters["dashboard/selectedProducts"];
+    },
+    products() {
+      return [...new Set(this.selectedProducts)];
+    },
+    totalPrice() {
+      const sum = this.selectedProducts.reduce((accumulator, object) => {
+        return accumulator + (object.price - object.discount);
+      }, 0);
+      return sum;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .order-summary {

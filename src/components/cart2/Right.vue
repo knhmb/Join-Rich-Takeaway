@@ -3,11 +3,45 @@
   <div class="cart-total">
     <base-card>
       <p>{{ $t("total") }}</p>
-      <p>HK$ 189.0</p>
-      <base-button>{{ $t("checkout") }}</base-button>
+      <p>HK$ {{ totalPrice + products[0].deliveryFee }}</p>
+      <base-button @click="checkout">{{ $t("checkout") }}</base-button>
     </base-card>
   </div>
 </template>
+
+<script>
+import { ElNotification } from "element-plus";
+export default {
+  computed: {
+    selectedProducts() {
+      return this.$store.getters["dashboard/selectedProducts"];
+    },
+    products() {
+      return [...new Set(this.selectedProducts)];
+    },
+    totalPrice() {
+      const sum = this.selectedProducts.reduce((accumulator, object) => {
+        return accumulator + (object.price - object.discount);
+      }, 0);
+      return sum;
+    },
+    isLoggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
+  },
+  methods: {
+    checkout() {
+      if (!this.isLoggedIn) {
+        ElNotification({
+          title: "Error",
+          message: "Please Login First",
+          type: "error",
+        });
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 .cart-total .card {

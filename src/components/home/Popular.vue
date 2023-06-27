@@ -3,18 +3,16 @@
   <section class="popular">
     <h2>{{ $t("popular_near_you") }}</h2>
     <carousel :breakpoints="breakpoints">
-      <slide v-for="slide in 10" :key="slide">
+      <slide v-for="slide in restaurants" :key="slide">
         <el-row :gutter="10">
-          <el-col :sm="12" :md="6" v-for="item in 8" :key="item">
+          <el-col :sm="12" :md="6" v-for="item in restaurants" :key="item">
             <base-card>
               <div class="top">
                 <img src="../../assets/Restaurant.png" alt="" />
                 <img src="../../assets/Bookmark-Off.png" alt="" />
               </div>
-              <p class="name">Restaurant name</p>
-              <p class="description">
-                Address lorem ipsum dolor sit consect...
-              </p>
+              <p class="name">{{ item.name }}</p>
+              <p class="description">{{ item.address }}.</p>
             </base-card>
           </el-col>
         </el-row>
@@ -81,6 +79,11 @@ export default {
       },
     };
   },
+  computed: {
+    restaurants() {
+      return this.$store.getters["dashboard/restaurants"];
+    },
+  },
 };
 </script>
 
@@ -145,5 +148,6 @@ export default {
 .popular .card {
   width: 100%;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 </style>

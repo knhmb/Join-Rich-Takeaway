@@ -29,7 +29,7 @@
             v-model="$i18n.locale"
           >
             <span class="el-dropdown-link">
-              {{ $i18n.locale === "en" ? "English" : "Chinese" }}
+              {{ $i18n.locale === "en-US" ? "English" : "Chinese" }}
               <el-icon class="el-icon--right">
                 <ArrowDown />
               </el-icon>

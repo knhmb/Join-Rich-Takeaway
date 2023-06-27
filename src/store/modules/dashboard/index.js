@@ -10,6 +10,9 @@ export default {
       cmsContents: [],
       restaurants: [],
       products: [],
+      restaurantDetail: {},
+      restaurantProducts: [],
+      selectedProducts: [],
     };
   },
   getters,

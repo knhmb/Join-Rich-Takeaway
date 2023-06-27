@@ -3,8 +3,9 @@
   <section class="home">
     <base-container>
       <carousel :breakpoints="breakpoints">
-        <slide v-for="banner in banners" :key="banner">
+        <slide v-for="banner in banners" :key="banner.id">
           <img class="banner" :src="banner.thumbnail" alt="" />
+          <!-- <img class="banner" src="../assets/Rectangle-50.png" alt="" /> -->
         </slide>
         <template #addons>
           <navigation />
@@ -61,6 +62,7 @@ export default {
   created() {
     this.$store.commit("TOGGLE_AUTH_TYPE", "login");
     this.$store.dispatch("dashboard/getBanners");
+    this.$store.commit("dashboard/RESET_SELECTED_PRODUCTS");
   },
 };
 </script>

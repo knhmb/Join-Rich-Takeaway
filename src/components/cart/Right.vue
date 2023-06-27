@@ -3,11 +3,29 @@
   <div class="cart-right">
     <base-card>
       <p class="subtotal">{{ $t("subtotal") }}</p>
-      <p class="price">HK$ 174.0</p>
-      <base-button>{{ $t("select_address_payment") }}</base-button>
+      <p class="price">HK$ {{ totalPrice }}</p>
+      <base-button @click="$router.push('/cart-2')">{{
+        $t("select_address_payment")
+      }}</base-button>
     </base-card>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    selectedProducts() {
+      return this.$store.getters["dashboard/selectedProducts"];
+    },
+    totalPrice() {
+      const sum = this.selectedProducts.reduce((accumulator, object) => {
+        return accumulator + (object.price - object.discount);
+      }, 0);
+      return sum;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .cart-right .card {

@@ -19,7 +19,7 @@ const router = createRouter({
     { path: "/", redirect: "/home" },
     { path: "/home", component: Home },
     { path: "/privacy-policy", component: PrivacyPolicy },
-    { path: "/restaurant", component: Restaurant },
+    { path: "/restaurant/:slug", component: Restaurant, name: "restaurant" },
     { path: "/cart", component: Cart },
     { path: "/cart-2", component: Cart2 },
     { path: "/order", component: Order },

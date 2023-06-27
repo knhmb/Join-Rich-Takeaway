@@ -2,10 +2,9 @@
   <div class="restaurant-info">
     <base-card>
       <div class="top">
-        <h3>Papadam Indian Authentic</h3>
+        <h3>{{ restaurantDetail.name }}</h3>
         <p>
-          Restaurant description : Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit.
+          {{ restaurantDetail.description }}
         </p>
       </div>
       <div class="information">
@@ -15,7 +14,7 @@
           </div>
           <div class="text">
             <p>{{ $t("phone") }}</p>
-            <p>9876 1234</p>
+            <p>{{ restaurantDetail.phone }}</p>
           </div>
         </div>
       </div>
@@ -26,7 +25,7 @@
           </div>
           <div class="text">
             <p>{{ $t("opening_hours") }}</p>
-            <p>Monday - Sunday 08:30 - 21:00</p>
+            <p>{{ restaurantDetail.openingHours }}</p>
           </div>
         </div>
       </div>
@@ -38,8 +37,7 @@
           <div class="text">
             <p>{{ $t("address") }}</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit Fusce
-              vulputate gravida est
+              {{ restaurantDetail.address }}
             </p>
           </div>
         </div>
@@ -47,6 +45,16 @@
     </base-card>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    restaurantDetail() {
+      return this.$store.getters["dashboard/restaurantDetail"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .restaurant-info .card {

@@ -2,12 +2,24 @@
 <template>
   <div class="cart-left">
     <base-card>
-      <h3>Papadam Indian Authentic</h3>
+      <h3>{{ restaurantDetail.name }}</h3>
       <div class="info">
         <p>{{ $t("delivery_time") }}</p>
         <p>ASAP (40min)</p>
       </div>
-      <div class="item">
+      <div class="item" v-for="item in products" :key="item.id">
+        <div class="left">
+          <el-select v-model="item.quantity" placeholder="Select"> </el-select>
+          <span>{{ item.name }}</span>
+        </div>
+        <div class="right">
+          <p class="price" v-if="item.discount">HK$ {{ item.price }}</p>
+          <p class="discount">
+            HK$ {{ item.discount ? item.price - item.discount : item.price }}
+          </p>
+        </div>
+      </div>
+      <!-- <div class="item">
         <div class="left">
           <el-select v-model="value" placeholder="Select"> </el-select>
           <span>Product name</span>
@@ -26,23 +38,13 @@
           <p class="price">HK$ 97.0</p>
           <p class="discount">HK$ 58.0</p>
         </div>
-      </div>
-      <div class="item">
-        <div class="left">
-          <el-select v-model="value" placeholder="Select"> </el-select>
-          <span>Product name</span>
-        </div>
-        <div class="right">
-          <p class="price">HK$ 97.0</p>
-          <p class="discount">HK$ 58.0</p>
-        </div>
-      </div>
-      <p class="add-more">{{ $t("add_more_items") }}</p>
+      </div> -->
+      <p class="add-more" @click="$router.go(-1)">{{ $t("add_more_items") }}</p>
     </base-card>
     <base-card>
       <div class="total">
         <p>{{ $t("subtotal") }}</p>
-        <p>HK$ 174.0</p>
+        <p>HK$ {{ totalPrice }}</p>
       </div>
     </base-card>
   </div>
@@ -54,6 +56,23 @@ export default {
     return {
       value: 1,
     };
+  },
+  computed: {
+    restaurantDetail() {
+      return this.$store.getters["dashboard/restaurantDetail"];
+    },
+    selectedProducts() {
+      return this.$store.getters["dashboard/selectedProducts"];
+    },
+    products() {
+      return [...new Set(this.selectedProducts)];
+    },
+    totalPrice() {
+      const sum = this.selectedProducts.reduce((accumulator, object) => {
+        return accumulator + (object.price - object.discount);
+      }, 0);
+      return sum;
+    },
   },
 };
 </script>

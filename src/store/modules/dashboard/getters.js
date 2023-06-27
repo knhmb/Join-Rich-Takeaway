@@ -11,4 +11,13 @@ export default {
   products(state) {
     return state.products;
   },
+  restaurantDetail(state) {
+    return state.restaurantDetail;
+  },
+  restaurantProducts(state) {
+    return state.restaurantProducts;
+  },
+  selectedProducts(state) {
+    return state.selectedProducts;
+  },
 };

@@ -5,15 +5,15 @@
     <carousel :breakpoints="breakpoints">
       <slide v-for="restaurant in restaurants" :key="restaurant">
         <el-row :gutter="10">
-          <el-col :sm="12" :md="6" v-for="item in 8" :key="item">
-            <base-card>
+          <el-col :sm="12" :md="6" v-for="item in restaurants" :key="item">
+            <base-card @click="restDetail(item.slug)">
               <div class="top">
                 <img src="../../assets/Restaurant.png" alt="" />
                 <img src="../../assets/Bookmark-Off.png" alt="" />
               </div>
-              <p class="name">Restaurant name</p>
+              <p class="name">{{ item.name }}</p>
               <p class="description">
-                Address lorem ipsum dolor sit consect...
+                {{ item.address }}
               </p>
             </base-card>
           </el-col>
@@ -61,6 +61,11 @@ export default {
       return this.$store.getters["dashboard/restaurants"];
     },
   },
+  methods: {
+    restDetail(slug) {
+      this.$router.push({ name: "restaurant", params: { slug } });
+    },
+  },
   created() {
     this.$store.dispatch("dashboard/getRestaurants");
   },
@@ -81,6 +86,10 @@ export default {
   letter-spacing: -0.02em;
   color: #141414;
   margin-bottom: 1rem;
+}
+
+.lowest-delivery .el-row {
+  width: 100%;
 }
 
 .lowest-delivery .top {
@@ -126,5 +135,6 @@ export default {
 .lowest-delivery .card {
   width: 100%;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 </style>

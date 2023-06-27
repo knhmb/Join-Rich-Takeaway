@@ -3,14 +3,22 @@
   <section class="popular">
     <h3>{{ $t("popular") }}</h3>
     <base-card>
-      <div class="item">
+      <div
+        class="item"
+        v-for="item in restaurantProducts"
+        :key="item.id"
+        @click="setSelectedItem(item)"
+      >
         <div class="text">
-          <p class="name">Product name</p>
-          <span class="discount">HK$ 58.0</span>
-          <span class="price">HK$ 97.0</span>
+          <p class="name">{{ item.name }}</p>
+          <span class="discount">HK$ {{ item.price }}</span>
+          <span class="price" v-if="item.discount"
+            >HK$ {{ item.price - item.discount }}</span
+          >
         </div>
+        <!-- <div class="dot"></div> -->
       </div>
-      <div class="item">
+      <!-- <div class="item">
         <div class="text">
           <p class="name">Product name</p>
           <span class="discount">HK$ 58.0</span>
@@ -73,7 +81,7 @@
           <span class="discount">HK$ 58.0</span>
           <span class="price">HK$ 97.0</span>
         </div>
-      </div>
+      </div> -->
     </base-card>
   </section>
 </template>
@@ -81,8 +89,25 @@
 <script>
 export default {
   computed: {
-    products() {
-      return this.$store.getters["dashboard/products"];
+    restaurantProducts() {
+      return this.$store.getters["dashboard/restaurantProducts"];
+    },
+    selectedProducts() {
+      return this.$store.getters["dashboard/selectedProducts"];
+    },
+  },
+  methods: {
+    setSelectedItem(item) {
+      let count = 1;
+
+      for (const element of this.selectedProducts) {
+        if (element === item) {
+          count += 1;
+        }
+      }
+      console.log(count);
+      item.quantity = count;
+      this.$store.commit("dashboard/SELECTED_PRODUCTS", item);
     },
   },
   created() {
@@ -107,6 +132,7 @@ export default {
   display: flex;
   /* align-items: center; */
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .popular .item:not(:last-of-type) {

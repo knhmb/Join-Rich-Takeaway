@@ -17,4 +17,16 @@ export default {
     const response = await axios.get("/api/v1/platform/products");
     context.commit("SET_PRODUCTS", response.data.items);
   },
+  async getRestaurantDetail(context, payload) {
+    const response = await axios.get(`/api/v1/accounts/restaurants/${payload}`);
+    context.commit("SET_RESTAURANT_DETAIL", response.data.item);
+  },
+  async getRestaurantProducts(context, payload) {
+    const response = await axios.get("/api/v1/platform/products", {
+      params: {
+        filter: `restaurant:${payload}`,
+      },
+    });
+    context.commit("SET_RESTAURANT_PRODUCTS", response.data.items);
+  },
 };

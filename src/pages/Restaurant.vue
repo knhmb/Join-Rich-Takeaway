@@ -26,11 +26,37 @@ export default {
     Popular,
     AddToCart,
   },
+  watch: {
+    $i18n: {
+      deep: true,
+      handler() {
+        this.$store.dispatch(
+          "dashboard/getRestaurantDetail",
+          this.$route.params.slug
+        );
+        this.$store.dispatch(
+          "dashboard/getRestaurantProducts",
+          this.$route.params.slug
+        );
+      },
+    },
+  },
+  created() {
+    this.$store.dispatch(
+      "dashboard/getRestaurantDetail",
+      this.$route.params.slug
+    );
+    this.$store.dispatch(
+      "dashboard/getRestaurantProducts",
+      this.$route.params.slug
+    );
+  },
 };
 </script>
 
 <style scoped>
 .restaurant {
   margin-top: 1rem;
+  min-height: 81vh;
 }
 </style>

@@ -3,11 +3,21 @@
   <section class="e-wallet">
     <base-card>
       <h3>{{ $t("e-wallet") }}</h3>
-      <p>HK$ 2498.00</p>
+      <p>HK$ {{ currentUser.eWallet }}</p>
       <base-button>{{ $t("topup") }}</base-button>
     </base-card>
   </section>
 </template>
+
+<script>
+  export default {
+    computed: {
+      currentUser() {
+        return this.$store.getters['auth/currentUser']
+      }
+    }
+  }
+</script>
 
 <style scoped>
 .e-wallet .card {

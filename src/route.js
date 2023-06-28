@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "./store/store";
 
 import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
@@ -26,6 +27,13 @@ const router = createRouter({
     {
       path: "/user-profile",
       component: UserProfile,
+      beforeEnter(_, _2, next) {
+        if(store.getters['auth/isLoggedIn']) {
+          next()
+        } else {
+          next('/')
+        }
+      },
       children: [
         {
           path: "personal-information",

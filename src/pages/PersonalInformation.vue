@@ -2,21 +2,21 @@
   <section class="personal-information">
     <base-card>
       <h4>{{ $t("personal_information") }}</h4>
-      <el-form label-position="top">
-        <el-form-item :label="$t('username')">
+      <el-form label-position="top" :model="ruleForm" :rules="rules" ref="ruleFormRef" hide-required-asterisk>
+        <el-form-item :label="$t('username')" prop="username">
           <base-input v-model="ruleForm.username"></base-input>
         </el-form-item>
-        <el-form-item :label="$t('display_name')">
+        <el-form-item :label="$t('display_name')" prop="displayName">
           <base-input v-model="ruleForm.displayName"></base-input>
         </el-form-item>
-        <el-form-item :label="$t('email')">
-          <base-input v-model="ruleForm.email"></base-input>
+        <el-form-item :label="$t('email')" prop="email">
+          <base-input disabled v-model="ruleForm.email"></base-input>
         </el-form-item>
-        <el-form-item :label="$t('phone')">
+        <el-form-item :label="$t('phone')" prop="phone">
           <base-input v-model="ruleForm.phone"></base-input>
         </el-form-item>
         <el-form-item>
-          <base-button>{{ $t("save") }}</base-button>
+          <base-button @click="update">{{ $t("save") }}</base-button>
         </el-form-item>
       </el-form>
     </base-card>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { ElNotification } from 'element-plus';
+
 export default {
   data() {
     return {
@@ -33,8 +35,61 @@ export default {
         email: "chantaiman@email.com",
         phone: "98761234",
       },
+      rules: {
+        username: [
+          {required: true, message: this.$t('username_required'), trigger: 'blur'}
+        ],
+        displayName: [
+          {required: true, message: this.$t('name_required'), trigger: 'blur'}
+        ],
+        email: [
+          {required: true, message: this.$t('email_required'), trigger: 'blur'},
+          {type: 'email', message: this.$t('email_format'), trigger: 'blur'}
+        ],
+        phone: [
+          {required: false, trigger: 'blur'}
+        ]
+      }
     };
   },
+  computed: {
+    currentUser() {
+      return this.$store.getters['auth/currentUser']
+    }
+  },
+  methods: {
+    update() {
+      this.$refs.ruleFormRef.validate(valid => {
+        if(valid) {
+          const data = {
+            username: this.ruleForm.username,
+            displayName: this.ruleForm.displayName,
+            email: this.ruleForm.email,
+            phone: this.ruleForm.phone
+          }
+          this.$store.dispatch('auth/updateUser', {data, id: this.currentUser.id}).then(() => {
+            ElNotification({
+              title: 'Success',
+              message: this.$t('data_updated'),
+              type: 'success'
+            })
+          }).catch(err => {
+            ElNotification({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'error'
+            })
+          })
+        }
+      })
+    }
+  },
+  created() {
+    this.ruleForm.username = this.currentUser.username,
+    this.ruleForm.displayName = this.currentUser.displayName,
+    this.ruleForm.email = this.currentUser.email,
+    this.ruleForm.phone = this.currentUser.phone
+  }
 };
 </script>
 

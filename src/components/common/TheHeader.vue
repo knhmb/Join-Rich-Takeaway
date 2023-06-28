@@ -45,7 +45,32 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <el-button @click="openAuthDialog"> {{ $t("login") }} </el-button>
+          <el-button @click="openAuthDialog" v-if="!isLoggedIn"> {{ $t("login") }} </el-button>
+          <div v-else class="login-content">
+            <div class="box" @click="$router.push('/cart')">
+              <img src="../../assets/Cart-Off.png" alt="" />
+            </div>
+            <div class="box" @click="toggleMenu">
+              <img src="../../assets/Profile-Off.png" alt="" />
+            </div>
+            <div class="menu-list" v-if="isMenuDisplayed">
+              <div class="single-item" @click="navigate('/user-profile')">
+                <!-- <img
+                  src="../../assets/profile-personal-information.png"
+                  alt=""
+                /> -->
+                <p>Profile</p>
+              </div>
+              <div class="single-item" @click="navigate('/order')">
+                <!-- <img src="../../assets/summary.png" alt="" /> -->
+                <p>Order</p>
+              </div>
+              <div class="single-item" @click="logout">
+                <!-- <img src="../../assets/profile-logout.png" alt="" /> -->
+                <p>Logout</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </base-container>
@@ -72,7 +97,13 @@ export default {
     return {
       Search,
       filterDialog: false,
+      isMenuDisplayed: false
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters['auth/isLoggedIn']
+    }
   },
   methods: {
     openAuthDialog() {
@@ -81,6 +112,18 @@ export default {
     setLang(option) {
       this.$i18n.locale = option;
     },
+    toggleMenu() {
+      this.isMenuDisplayed = !this.isMenuDisplayed
+    },
+    logout() {
+      this.$store.dispatch('auth/logout').then(() =>{
+        this.$router.replace('/')
+      })
+    },
+    navigate(path) {
+      this.$router.push(path)
+      this.isMenuDisplayed = false
+    }
   },
 };
 </script>
@@ -176,6 +219,70 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+header .login-content {
+  display: inline-flex;
+  justify-content: end;
+  position: relative;
+  width: fit-content;
+  margin-left: 1rem;
+}
+
+header .login-content .box {
+  background: #ffffff;
+  border: 1px solid #e6e4e4;
+  border-radius: 100%;
+  width: fit-content;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+header .login-content .box:first-of-type {
+  margin-right: 1rem;
+}
+
+header .login-content .box img {
+  width: 1.5rem;
+}
+
+header .login-content .menu-list {
+  background: #ffffff;
+  border: 1px solid #e6e4e4;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  padding: 1rem;
+  position: absolute;
+  bottom: -9.5rem;
+  left: -4rem;
+  min-width: 9rem;
+  z-index: 1;
+}
+
+header .login-content .menu-list .single-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header .login-content .menu-list .single-item:hover {
+  padding-left: 0.5rem;
+}
+
+header .login-content .menu-list .single-item:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+
+header .login-content .menu-list .single-item p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: #141414;
+  margin-left: 0.5rem;
 }
 
 @media screen and (max-width: 880px) {

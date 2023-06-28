@@ -8,7 +8,7 @@
               <div class="user-image">
                 <img class="user-img" src="../assets/Avatar.png" alt="" />
               </div>
-              <p>Tai Man</p>
+              <p>{{ currentUser.displayName }}</p>
             </div>
             <div class="list">
               <div
@@ -57,7 +57,7 @@
                 <p>{{ $t("favorites") }}</p>
               </div>
               <div class="single-item">
-                <p>{{ $t("logout") }}</p>
+                <p @click="logout">{{ $t("logout") }}</p>
               </div>
             </div>
           </base-card>
@@ -75,9 +75,19 @@
 
 <script>
 export default {
+  computed: {
+    currentUser() {
+      return this.$store.getters['auth/currentUser']
+    }
+  },
   methods: {
     navigate(path) {
       this.$router.push({ name: path });
+    },
+    logout() {
+      this.$store.dispatch('auth/logout').then(() =>{
+        this.$router.replace('/')
+      })
     },
   },
 };

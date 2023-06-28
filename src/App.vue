@@ -13,6 +13,11 @@ export default {
     TheHeader,
     TheFooter,
   },
+  created() {
+    this.$store.dispatch('auth/checkUser').then(() => {}).catch(() => {
+      this.$store.dispatch('auth/logout')
+    })
+  }
 };
 </script>
 

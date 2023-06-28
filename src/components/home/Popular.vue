@@ -6,7 +6,7 @@
       <slide v-for="slide in restaurants" :key="slide">
         <el-row :gutter="10">
           <el-col :sm="12" :md="6" v-for="item in restaurants" :key="item">
-            <base-card>
+            <base-card @click="restDetail(item.slug)">
               <div class="top">
                 <img src="../../assets/Restaurant.png" alt="" />
                 <img src="../../assets/Bookmark-Off.png" alt="" />
@@ -84,6 +84,11 @@ export default {
       return this.$store.getters["dashboard/restaurants"];
     },
   },
+  methods: {
+    restDetail(slug) {
+      this.$router.push({ name: "restaurant", params: { slug } });
+    },
+  }
 };
 </script>
 

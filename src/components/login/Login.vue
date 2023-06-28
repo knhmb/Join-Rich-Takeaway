@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
 import ForgotPassword from "../forgot-password/ForgotPassword.vue";
 import ResetPassword from "../forgot-password/ResetPassword.vue";
 import CreateAccount from "@/components/register/CreateAccount.vue";
@@ -114,7 +115,15 @@ export default {
             username: this.ruleForm.username,
             password: this.ruleForm.password,
           };
-          console.log(data);
+          this.$store.dispatch('auth/login', data).then(() => {
+            this.closeDialog()
+          }).catch(err => {
+            ElNotification({
+              title: 'Error',
+              message: err.response.data.message,
+              type: 'error'
+            })
+          })
         }
       });
     },

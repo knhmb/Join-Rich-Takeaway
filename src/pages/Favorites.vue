@@ -4,20 +4,52 @@
     <base-card>
       <h3>{{ $t("favorites") }}</h3>
       <el-row :gutter="10">
-        <el-col :xs="24" :sm="12" v-for="item in 8" :key="item">
+        <el-col :xs="24" :sm="12" v-for="item in address.resources.restaurants" :key="item">
           <div class="inner-card">
             <div class="top">
               <img src="../assets/Restaurant.png" alt="" />
-              <img src="../assets/bookmark-on.png" alt="" />
+              <img @click="removeBookmark(item.slug)" src="../assets/bookmark-on.png" alt="" />
             </div>
-            <p class="name">Restaurant name</p>
-            <p class="description">Address lorem ipsum dolor sit consect...</p>
+            <p class="name">{{ item.name }}</p>
+            <p class="description">{{ item.description }}</p>
           </div>
         </el-col>
       </el-row>
     </base-card>
   </section>
 </template>
+
+<script>
+import { ElNotification } from 'element-plus'
+
+  export default {
+    computed: {
+      address() {
+        return this.$store.getters['auth/address']
+      }
+    },
+    methods: {
+      removeBookmark(slug) {
+        this.$store.dispatch('auth/removeBookmark', slug).then(() => {}).catch(err => {
+          ElNotification({
+            title: "Error",
+            message: err.response.data.message,
+            type: 'error'
+          })
+        })
+      },
+    },
+    created() {
+    this.$store.dispatch('auth/getAddresses').then(() => {}).catch(err => {
+      ElNotification({
+        title: 'Error',
+        message: err.response.data.message,
+        type: 'error'
+      })
+    })
+  }
+  }
+</script>
 
 <style scoped>
 .favorites .card {

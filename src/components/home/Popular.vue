@@ -9,7 +9,7 @@
             <base-card @click="restDetail(item.slug)">
               <div class="top">
                 <img src="../../assets/Restaurant.png" alt="" />
-                <img src="../../assets/Bookmark-Off.png" alt="" />
+                <img @click.stop="bookmark(item.slug)" src="../../assets/Bookmark-Off.png" alt="" />
               </div>
               <p class="name">{{ item.name }}</p>
               <p class="description">{{ item.address }}.</p>
@@ -52,6 +52,7 @@
 <script>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -88,6 +89,29 @@ export default {
     restDetail(slug) {
       this.$router.push({ name: "restaurant", params: { slug } });
     },
+    bookmark(rest) {
+      if(!this.isLoggedIn) {
+        ElNotification({
+          title: 'Error',
+          message: this.$t('login_required'),
+          type: 'error'
+        })
+        return
+      }
+      this.$store.dispatch('auth/bookmark', rest).then(() => {
+        ElNotification({
+          title: 'Success',
+          message: this.$t('item_bookmarked'),
+          type: 'success'
+        })
+      }).catch(err => {
+        ElNotification({
+          title: 'Error',
+          message: err.response.data.message,
+          type: 'error'
+        })
+      })
+    }
   }
 };
 </script>

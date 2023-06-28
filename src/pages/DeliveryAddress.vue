@@ -61,6 +61,7 @@ export default {
       item.isVisible = !item.isVisible;
     },
   },
+  
 };
 </script>
   

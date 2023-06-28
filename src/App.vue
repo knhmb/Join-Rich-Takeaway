@@ -14,7 +14,8 @@ export default {
     TheFooter,
   },
   created() {
-    this.$store.dispatch('auth/checkUser').then(() => {}).catch(() => {
+    const token = localStorage.getItem('accessToken')
+    this.$store.dispatch('auth/checkUser', token).then(() => {}).catch(() => {
       this.$store.dispatch('auth/logout')
     })
   }

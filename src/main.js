@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import store from "./store/store";
 import router from "./route";
-import "@/axios";
+// import "@/axios";
 
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -16,6 +16,7 @@ import BaseContainer from "@/ui/BaseContainer.vue";
 import BaseButton from "@/ui/BaseButton.vue";
 import BaseInput from "@/ui/BaseInput.vue";
 import BaseCard from "@/ui/BaseCard.vue";
+
 
 const app = createApp(App);
 

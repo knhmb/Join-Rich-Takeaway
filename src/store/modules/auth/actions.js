@@ -15,12 +15,28 @@ export default {
     await axios.delete('/api/v1/authenticate')
     context.commit('LOGOUT')
   },
-  async checkUser(context) {
-    const response = await axios.get('/api/v1/authenticate')
+  async checkUser(context, payload) {
+    const response = await axios.get('/api/v1/authenticate', {
+      headers: {
+        Authorization: `Bearer ${payload}`
+      }
+    })
     context.commit('LOGIN', response.data)
   },
   async updateUser(context, payload) {
     const response = await axios.put(`/api/v1/accounts/${payload.id}`, payload.data)
     context.commit('UPDATE_USER', response.data.item)
+  },
+  async getAddresses(context) {
+    const response = await axios.get('/api/v1/accounts/favourites/@me')
+    context.commit('SET_ADDRESSES', response.data)
+  },
+  async bookmark(context, payload) {
+    const response = await axios.post(`/api/v1/accounts/favourites/@me/restaurant/${payload}`)
+    context.commit('SET_ADDRESSES', response.data.item)
+  },
+  async removeBookmark(context, payload) {
+    const response = await axios.delete(`/api/v1/accounts/favourites/@me/restaurant/${payload}`)
+    context.commit('SET_ADDRESSES', response.data.item)
   }
 };

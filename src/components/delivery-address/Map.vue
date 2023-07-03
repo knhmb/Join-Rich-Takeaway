@@ -112,23 +112,70 @@ export default {
       if ([this.unit, this.block, this.addressName].includes("")) {
         ElNotification({
           title: "Error",
-          message: this.$t('fill_all_fields'),
+          message: this.$t("fill_all_fields"),
           type: "error",
         });
         return;
       }
       this.$emit("closedDialog", false);
       this.currentStep = 1;
-      //   const data = {
-      //     name: this.selectedCity,
-      //     unit: this.unit,
-      //     building: this.block,
-      //     longtitude: this.longtitude,
-      //     latitude: this.latitude,
-      //   };
+      const data = {
+        name: this.selectedCity,
+        unit: this.unit,
+        building: this.block,
+        longtitude: this.longtitude,
+        latitude: this.latitude,
+      };
 
+      this.$store
+        .dispatch("profile/saveAddress", data)
+        .then(() => {
+          this.$store.dispatch("profile/getAddresses");
+          this.$emit("closedDialog", false);
+          this.currentStep = 1;
+          this.selectedCity = null;
+          this.selectedLocation = null;
+          this.unit = "";
+          this.block = "";
+          this.addressName = "";
+          this.latitude = "";
+          this.longtitude = "";
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.response.data.message,
+            type: "error",
+          });
+        });
+
+      // this.$store
+      //   .dispatch("auth/checkAccessToken")
+      //   .then(() => {
+      // this.$store
+      //   .dispatch("profile/saveAddress", data)
+      //   .then(() => {
+      //     this.$store.dispatch("profile/getAddresses");
+      //     this.$emit("closedDialog", false);
+      //     this.currentStep = 1;
+      //     this.selectedCity = null;
+      //     this.selectedLocation = null;
+      //     this.unit = "";
+      //     this.block = "";
+      //     this.addressName = "";
+      //     this.latitude = "";
+      //     this.longtitude = "";
+      //   })
+      //   .catch((err) => {
+      //     ElNotification({
+      //       title: "Error",
+      //       message: err.response.data.message,
+      //       type: "Error",
+      //     });
+      //   });
+      // .catch(() => {
       //   this.$store
-      //     .dispatch("auth/checkAccessToken")
+      //     .dispatch("auth/checkRefreshToken")
       //     .then(() => {
       //       this.$store.dispatch("profile/saveAddress", data).then(() => {
       //         this.$store.dispatch("profile/getAddresses");
@@ -144,33 +191,16 @@ export default {
       //       });
       //     })
       //     .catch(() => {
-      //       this.$store
-      //         .dispatch("auth/checkRefreshToken")
-      //         .then(() => {
-      //           this.$store.dispatch("profile/saveAddress", data).then(() => {
-      //             this.$store.dispatch("profile/getAddresses");
-      //             this.$emit("closedDialog", false);
-      //             this.currentStep = 1;
-      //             this.selectedCity = null;
-      //             this.selectedLocation = null;
-      //             this.unit = "";
-      //             this.block = "";
-      //             this.addressName = "";
-      //             this.latitude = "";
-      //             this.longtitude = "";
-      //           });
-      //         })
-      //         .catch(() => {
-      //           ElNotification({
-      //             title: "Error",
-      //             message: "Token Expired! Please Login Again!",
-      //             type: "Error",
-      //           });
-      //           this.$emit("closedDialog", false);
-      //           this.$store.dispatch("auth/logout");
-      //           this.$router.replace("/");
-      //         });
+      //       ElNotification({
+      //         title: "Error",
+      //         message: "Token Expired! Please Login Again!",
+      //         type: "Error",
+      //       });
+      //       this.$emit("closedDialog", false);
+      //       this.$store.dispatch("auth/logout");
+      //       this.$router.replace("/");
       //     });
+      // });
     },
   },
   mounted() {

@@ -4,7 +4,9 @@
     <base-card>
       <p>{{ $t("total") }}</p>
       <p>HK$ {{ totalPrice + products[0].deliveryFee }}</p>
-      <base-button @click="checkout">{{ $t("checkout") }}</base-button>
+      <base-button :disabled="isDisabled" @click="checkout">{{
+        $t("checkout")
+      }}</base-button>
     </base-card>
   </div>
 </template>
@@ -28,6 +30,12 @@ export default {
     isLoggedIn() {
       return this.$store.getters["auth/isLoggedIn"];
     },
+    savedAddress() {
+      return this.$store.getters["profile/savedAddress"];
+    },
+    isDisabled() {
+      return Object.keys(this.savedAddress).length < 0;
+    },
   },
   methods: {
     checkout() {
@@ -37,6 +45,16 @@ export default {
           message: "Please Login First",
           type: "error",
         });
+        return;
+      }
+
+      if (Object.keys(this.savedAddress).length <= 0) {
+        ElNotification({
+          title: "Error",
+          message: "Please Select an address",
+          type: "error",
+        });
+        return;
       }
     },
   },

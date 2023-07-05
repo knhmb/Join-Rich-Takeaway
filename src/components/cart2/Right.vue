@@ -3,7 +3,7 @@
   <div class="cart-total">
     <base-card>
       <p>{{ $t("total") }}</p>
-      <p>HK$ {{ totalPrice + products[0].deliveryFee }}</p>
+      <p>HK$ {{ cartItems.resources.subtotal + cartItems.resources.deliveryFee }}</p>
       <base-button :disabled="isDisabled" @click="checkout">{{
         $t("checkout")
       }}</base-button>
@@ -33,9 +33,15 @@ export default {
     savedAddress() {
       return this.$store.getters["profile/savedAddress"];
     },
+    cartItems() {
+      return this.$store.getters['cart/cartItems']
+    },
     isDisabled() {
       return Object.keys(this.savedAddress).length < 0;
     },
+    paymentMethod() {
+      return this.$store.getters['cart/paymentMethod']
+    }
   },
   methods: {
     checkout() {
@@ -56,6 +62,14 @@ export default {
         });
         return;
       }
+
+      if(this.paymentMethod === 'cash') {
+          console.log([... new Set(this.selectedProducts)]);
+          this.$store.dispatch('cart/cashPayment', {
+            address: this.savedAddress.id,
+            // cart: [... new Set(this.selectedProducts)]
+          })
+        }
     },
   },
 };

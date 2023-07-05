@@ -42,7 +42,7 @@
         <p>{{ $t("subtotal") }}</p>
         <p>HK$ {{ totalPrice }}</p>
       </div>
-      <base-button @click="$router.push('/cart')">{{
+      <base-button @click="addToCart">{{
         $t("add_to_cart")
       }}</base-button>
     </base-card>
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import { ElNotification } from 'element-plus';
+
 export default {
   data() {
     return {
@@ -73,6 +75,32 @@ export default {
       return sum;
     },
   },
+  methods: {
+    addToCart() {
+      if(this.selectedProducts.length <= 0) {
+        ElNotification({
+          title: 'Error',
+          message: 'Please Select a Product',
+          type: 'error'
+        })
+        return
+      }
+      const finalProducts = []
+      const cartProducts = [... new Set(this.selectedProducts)]
+      cartProducts.forEach(item => {
+        finalProducts.push({product: item.slug, quantity: item.quantity})
+      })
+      this.$store.dispatch('cart/addToCart', finalProducts).then(() => {
+        this.$router.push('/cart')
+      }).catch(err => {
+        ElNotification({
+          title: 'Error',
+          message: err.response.data.message,
+          type: 'error'
+        })
+      })
+    }
+  }
 };
 </script>
 

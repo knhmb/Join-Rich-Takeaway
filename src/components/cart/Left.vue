@@ -5,9 +5,9 @@
       <h3>{{ restaurantDetail.name }}</h3>
       <div class="info">
         <p>{{ $t("delivery_time") }}</p>
-        <p>ASAP (40min)</p>
+        <p>ASAP ({{cartItems.resources.deliveryTime}}min)</p>
       </div>
-      <div class="item" v-for="item in products" :key="item.id">
+      <div class="item" v-for="item in cartItems.resources.products" :key="item.id">
         <div class="left">
           <el-select v-model="item.quantity" placeholder="Select"> </el-select>
           <span>{{ item.name }}</span>
@@ -19,32 +19,12 @@
           </p>
         </div>
       </div>
-      <!-- <div class="item">
-        <div class="left">
-          <el-select v-model="value" placeholder="Select"> </el-select>
-          <span>Product name</span>
-        </div>
-        <div class="right">
-          <p class="price">HK$ 97.0</p>
-          <p class="discount">HK$ 58.0</p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="left">
-          <el-select v-model="value" placeholder="Select"> </el-select>
-          <span>Product name</span>
-        </div>
-        <div class="right">
-          <p class="price">HK$ 97.0</p>
-          <p class="discount">HK$ 58.0</p>
-        </div>
-      </div> -->
       <p class="add-more" @click="$router.go(-1)">{{ $t("add_more_items") }}</p>
     </base-card>
     <base-card>
       <div class="total">
         <p>{{ $t("subtotal") }}</p>
-        <p>HK$ {{ totalPrice }}</p>
+        <p>HK$ {{ cartItems.resources.subtotal }}</p>
       </div>
     </base-card>
   </div>
@@ -63,6 +43,9 @@ export default {
     },
     selectedProducts() {
       return this.$store.getters["dashboard/selectedProducts"];
+    },
+    cartItems() {
+      return this.$store.getters['cart/cartItems']
     },
     products() {
       return [...new Set(this.selectedProducts)];

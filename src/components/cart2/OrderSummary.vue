@@ -3,7 +3,7 @@
     <base-card>
       <h4>{{ $t("order_summary") }}</h4>
       <div class="first-section">
-        <div class="item" v-for="item in products" :key="item.id">
+        <div class="item" v-for="item in cartItems.resources.products" :key="item.id">
           <div class="top">
             <div class="left">
               <span>{{ item.quantity }}x</span>
@@ -40,16 +40,16 @@
       <div class="second-section">
         <div class="subtotal">
           <p class="grey">Subtotal</p>
-          <p class="grey">HK$ {{ totalPrice }}</p>
+          <p class="grey">HK$ {{ cartItems.resources.subtotal }}</p>
         </div>
         <div class="delivery-fee">
           <p class="grey">Delivery fee</p>
-          <p class="grey">HK$ {{ products[0].deliveryFee }}</p>
+          <p class="grey">HK$ {{ cartItems.resources.deliveryFee }}</p>
         </div>
       </div>
       <div class="total">
         <p>{{ $t("total") }}</p>
-        <p>HK$ {{ totalPrice + products[0].deliveryFee }}</p>
+        <p>HK$ {{ cartItems.resources.subtotal + cartItems.resources.deliveryFee }}</p>
       </div>
     </base-card>
   </div>
@@ -63,6 +63,9 @@ export default {
     },
     products() {
       return [...new Set(this.selectedProducts)];
+    },
+    cartItems() {
+      return this.$store.getters['cart/cartItems']
     },
     totalPrice() {
       const sum = this.selectedProducts.reduce((accumulator, object) => {

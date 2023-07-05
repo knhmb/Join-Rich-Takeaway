@@ -88,6 +88,11 @@ export default {
       longtitude: "",
     };
   },
+  computed: {
+    addressID() {
+      return this.$store.getters['profile/addressID']
+    }
+  },
   methods: {
     geolocate() {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -97,15 +102,17 @@ export default {
         };
       });
     },
+    resetValues() {
+      this.currentStep = 1;
+          this.selectedCity = null;
+          this.selectedLocation = null;
+          this.unit = "";
+          this.block = "";
+          this.addressName = "";
+          this.latitude = "";
+          this.longtitude = "";
+    },
     saveLocation() {
-      //   if (!this.selectedLocation) {
-      //     ElNotification({
-      //       title: "Error",
-      //       message: "Please Select a Location!",
-      //       type: "error",
-      //     });
-      //     return;
-      //   }
       this.currentStep = 2;
     },
     saveAddress() {
@@ -127,19 +134,27 @@ export default {
         latitude: this.latitude,
       };
 
+      if(this.addressID) {
+        this.$store.dispatch('profile/editAddress', {id: this.addressID, data}).then(() => {
+          this.$store.dispatch("profile/getAddresses");
+          this.$emit("closedDialog", false);
+          this.resetValues()
+        }) .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.response.data.message,
+            type: "error",
+          });
+        });
+        return
+      }
+
       this.$store
         .dispatch("profile/saveAddress", data)
         .then(() => {
           this.$store.dispatch("profile/getAddresses");
           this.$emit("closedDialog", false);
-          this.currentStep = 1;
-          this.selectedCity = null;
-          this.selectedLocation = null;
-          this.unit = "";
-          this.block = "";
-          this.addressName = "";
-          this.latitude = "";
-          this.longtitude = "";
+          this.resetValues()
         })
         .catch((err) => {
           ElNotification({
@@ -148,62 +163,10 @@ export default {
             type: "error",
           });
         });
-
-      // this.$store
-      //   .dispatch("auth/checkAccessToken")
-      //   .then(() => {
-      // this.$store
-      //   .dispatch("profile/saveAddress", data)
-      //   .then(() => {
-      //     this.$store.dispatch("profile/getAddresses");
-      //     this.$emit("closedDialog", false);
-      //     this.currentStep = 1;
-      //     this.selectedCity = null;
-      //     this.selectedLocation = null;
-      //     this.unit = "";
-      //     this.block = "";
-      //     this.addressName = "";
-      //     this.latitude = "";
-      //     this.longtitude = "";
-      //   })
-      //   .catch((err) => {
-      //     ElNotification({
-      //       title: "Error",
-      //       message: err.response.data.message,
-      //       type: "Error",
-      //     });
-      //   });
-      // .catch(() => {
-      //   this.$store
-      //     .dispatch("auth/checkRefreshToken")
-      //     .then(() => {
-      //       this.$store.dispatch("profile/saveAddress", data).then(() => {
-      //         this.$store.dispatch("profile/getAddresses");
-      //         this.$emit("closedDialog", false);
-      //         this.currentStep = 1;
-      //         this.selectedCity = null;
-      //         this.selectedLocation = null;
-      //         this.unit = "";
-      //         this.block = "";
-      //         this.addressName = "";
-      //         this.latitude = "";
-      //         this.longtitude = "";
-      //       });
-      //     })
-      //     .catch(() => {
-      //       ElNotification({
-      //         title: "Error",
-      //         message: "Token Expired! Please Login Again!",
-      //         type: "Error",
-      //       });
-      //       this.$emit("closedDialog", false);
-      //       this.$store.dispatch("auth/logout");
-      //       this.$router.replace("/");
-      //     });
-      // });
     },
   },
   mounted() {
+    console.log(this.addressID);
     this.geolocate();
     const originAutocomplete = new window.google.maps.places.Autocomplete(
       this.$refs["origin"],

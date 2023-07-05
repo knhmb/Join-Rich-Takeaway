@@ -8,6 +8,7 @@ export default {
     return {
       savedAddress: {},
       addresses: [],
+      addressID: ''
     };
   },
   getters,

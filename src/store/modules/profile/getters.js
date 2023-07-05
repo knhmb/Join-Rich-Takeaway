@@ -5,4 +5,7 @@ export default {
   addresses(state) {
     return state.addresses;
   },
+  addressID(state) {
+    return state.addressID
+  }
 };

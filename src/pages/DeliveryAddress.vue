@@ -2,22 +2,21 @@
   <section class="delivery-address">
     <base-card>
       <h3>{{ $t("delivery_address") }}</h3>
-      <el-row :gutter="15">
-        <el-col v-for="item in info" :key="item" :span="12">
+      <el-row :gutter="15" v-if="addresses.length > 0">
+        <el-col v-for="item in addresses" :key="item" :span="12">
           <div class="inner-card">
             <div class="top">
-              <p>Address name</p>
+              <p>{{ item.name }}</p>
               <div class="more">
                 <img @click="openMore(item)" src="../assets/more.png" alt="" />
                 <div v-if="item.isVisible" class="more-content">
-                  <p>{{ $t("edit") }}</p>
-                  <p>{{ $t("delete") }}</p>
+                  <p @click="editAddress(item.id)">{{ $t("edit") }}</p>
+                  <p @click="deleteAddress(item.id)">{{ $t("delete") }}</p>
                 </div>
               </div>
             </div>
             <p>
-              Address detail : lorem ipsum dolor sit amet consectetur adipiscing
-              elit
+              {{ item.building }} - {{ item.unit }}
             </p>
           </div>
         </el-col>
@@ -35,6 +34,7 @@
   
   <script>
 import MapsDialog from "@/components/delivery-address/MapsDialog.vue";
+import { ElNotification } from "element-plus";
 export default {
   components: { MapsDialog },
   data() {
@@ -60,8 +60,35 @@ export default {
     openMore(item) {
       item.isVisible = !item.isVisible;
     },
+    async deleteAddress(id) {
+      this.$store.dispatch('profile/deleteAddress', id).then(() => {
+        this.$store.dispatch('profile/getAddresses')
+        ElNotification({
+          title: 'Success',
+          message: 'Address Deleted',
+          type: 'success'
+        })
+      }).catch(err => {
+        ElNotification({
+          title: 'Error',
+          message: err.response.data.message,
+          type: 'error'
+        })
+      })
+    },
+    editAddress(id) {
+      this.$store.commit('profile/STORE_ADDRESS_ID', id)
+      this.dialogVisible = true
+    }
   },
-  
+  computed: {
+    addresses() {
+      return this.$store.getters['profile/addresses']
+    }
+  },
+  created() {
+    this.$store.dispatch('profile/getAddresses')
+  }
 };
 </script>
   

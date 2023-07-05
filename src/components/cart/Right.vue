@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="cart-right">
-    <base-card>
+    <base-card v-if="Object.keys(cartItems).length > 0">
       <p class="subtotal">{{ $t("subtotal") }}</p>
       <p class="price">HK$ {{ cartItems.resources.subtotal }}</p>
       <base-button @click="$router.push('/cart-2')">{{

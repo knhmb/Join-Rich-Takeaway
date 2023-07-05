@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="cart-left">
-    <base-card>
+    <base-card v-if="Object.keys(cartItems).length > 0">
       <h3>{{ restaurantDetail.name }}</h3>
       <div class="info">
         <p>{{ $t("delivery_time") }}</p>
@@ -22,7 +22,7 @@
       <p class="add-more" @click="$router.go(-1)">{{ $t("add_more_items") }}</p>
     </base-card>
     <base-card>
-      <div class="total">
+      <div class="total" v-if="Object.keys(cartItems).length > 0">
         <p>{{ $t("subtotal") }}</p>
         <p>HK$ {{ cartItems.resources.subtotal }}</p>
       </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {

@@ -67,7 +67,16 @@ export default {
           console.log([... new Set(this.selectedProducts)]);
           this.$store.dispatch('cart/cashPayment', {
             address: this.savedAddress.id,
-            // cart: [... new Set(this.selectedProducts)]
+          })
+        } else  if(this.paymentMethod === 'stripe') {
+          console.log([... new Set(this.selectedProducts)]);
+          this.$store.dispatch('cart/stripePayment', {
+            address: this.savedAddress.id,
+          })
+        } else if(this.paymentMethod === 'ewallet') {
+          console.log([... new Set(this.selectedProducts)]);
+          this.$store.dispatch('cart/ewalletPayment', {
+            address: this.savedAddress.id,
           })
         }
     },

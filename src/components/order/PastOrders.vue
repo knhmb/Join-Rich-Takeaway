@@ -2,15 +2,16 @@
 <template>
   <div class="past-orders">
     <h4>{{ $t("past_orders") }}</h4>
-    <carousel :breakpoints="breakpoints">
-      <slide v-for="slide in 10" :key="slide">
-        <base-card>
+    <carousel :breakpoints="breakpoints" v-if="orders.length > 0">
+      <slide v-for="slide in orders" :key="slide.id">
+        <template v-for="order in orders" :key="order.id">
+        <base-card v-if="order.status === 'Order_Completed'">
           <img src="../../assets/Restaurant.png" alt="" />
-          <p class="name">Restaurant name restaurant name...</p>
-          <p class="no">#1234<span>•</span>2022-08-11 12:31</p>
-          <p class="price">HK$ 98.00</p>
-          <el-button>{{ $t("select_items_to_reorder") }}</el-button>
+          <p class="name">{{order.restaurant}}</p>
+          <p class="no">#{{order.id}}<span>•</span>{{order.createdAt}}</p>
+          <p class="price">HK$ {{ order.subtotal }}</p>
         </base-card>
+      </template>
       </slide>
       <template #addons>
         <navigation />
@@ -49,6 +50,11 @@ export default {
       },
     };
   },
+  computed: {
+    orders() {
+      return this.$store.getters['cart/orders']
+    }
+  }
 };
 </script>
     

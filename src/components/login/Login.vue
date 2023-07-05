@@ -116,6 +116,8 @@ export default {
             password: this.ruleForm.password,
           };
           this.$store.dispatch('auth/login', data).then(() => {
+            this.$store.dispatch('auth/getBookmarks')
+
             this.closeDialog()
           }).catch(err => {
             ElNotification({

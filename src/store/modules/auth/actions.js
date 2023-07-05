@@ -27,16 +27,16 @@ export default {
     const response = await axios.put(`/api/v1/accounts/${payload.id}`, payload.data)
     context.commit('UPDATE_USER', response.data.item)
   },
-  async getAddresses(context) {
+  async getBookmarks(context) {
     const response = await axios.get('/api/v1/accounts/favourites/@me')
-    context.commit('SET_ADDRESSES', response.data)
+    context.commit('SET_BOOKMARKS', response.data)
   },
   async bookmark(context, payload) {
     const response = await axios.post(`/api/v1/accounts/favourites/@me/restaurant/${payload}`)
-    context.commit('SET_ADDRESSES', response.data.item)
+    context.commit('SET_BOOKMARKS', response.data)
   },
   async removeBookmark(context, payload) {
     const response = await axios.delete(`/api/v1/accounts/favourites/@me/restaurant/${payload}`)
-    context.commit('SET_ADDRESSES', response.data.item)
+    context.commit('SET_BOOKMARKS', response.data)
   }
 };

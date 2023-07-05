@@ -2,18 +2,18 @@
 <template>
   <section class="favorites" v-if="isLoggedIn">
     <h2>{{ $t("favorites") }}</h2>
-    <carousel :breakpoints="breakpoints">
-      <slide v-for="slide in 10" :key="slide">
+    <carousel :breakpoints="breakpoints" v-if="bookmarks.resources.restaurants.length > 0">
+      <slide v-for="slide in bookmarks.resources.restaurants" :key="slide">
         <el-row :gutter="10">
-          <el-col :sm="12" :md="6" v-for="item in 8" :key="item">
+          <el-col :sm="12" :md="6" v-for="item in bookmarks.resources.restaurants" :key="item">
             <base-card>
               <div class="top">
                 <img src="../../assets/Restaurant.png" alt="" />
                 <img src="../../assets/Bookmark-Off.png" alt="" />
               </div>
-              <p class="name">Restaurant name</p>
+              <p class="name">{{ item.name }}</p>
               <p class="description">
-                Address lorem ipsum dolor sit consect...
+                {{item.description}}
               </p>
             </base-card>
           </el-col>
@@ -60,6 +60,9 @@ export default {
     isLoggedIn() {
       return this.$store.getters["auth/isLoggedIn"];
     },
+    bookmarks() {
+        return this.$store.getters['auth/bookmarks']
+      }
   },
 };
 </script>
@@ -78,6 +81,10 @@ export default {
   letter-spacing: -0.02em;
   color: #141414;
   margin-bottom: 1rem;
+}
+
+.favorites .el-row {
+  width: 100%
 }
 
 .favorites .top {

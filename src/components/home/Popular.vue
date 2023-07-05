@@ -84,6 +84,9 @@ export default {
     restaurants() {
       return this.$store.getters["dashboard/restaurants"];
     },
+    isLoggedIn() {
+      return this.$store.getters['auth/isLoggedIn']
+    }
   },
   methods: {
     restDetail(slug) {

@@ -1,14 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="favorites">
-    <base-card>
+    <base-card v-if="bookmarks.resources.restaurants.length > 0">
       <h3>{{ $t("favorites") }}</h3>
       <el-row :gutter="10">
-        <el-col :xs="24" :sm="12" v-for="item in address.resources.restaurants" :key="item">
+        <el-col :xs="24" :sm="12" v-for="item in bookmarks.resources.restaurants" :key="item">
           <div class="inner-card">
             <div class="top">
               <img src="../assets/Restaurant.png" alt="" />
-              <img @click="removeBookmark(item.slug)" src="../assets/bookmark-on.png" alt="" />
+              <img @click="removeBookmark(item.slug)" class="remove" src="../assets/bookmark-on.png" alt="" />
             </div>
             <p class="name">{{ item.name }}</p>
             <p class="description">{{ item.description }}</p>
@@ -24,13 +24,19 @@ import { ElNotification } from 'element-plus'
 
   export default {
     computed: {
-      address() {
-        return this.$store.getters['auth/address']
+      bookmarks() {
+        return this.$store.getters['auth/bookmarks']
       }
     },
     methods: {
       removeBookmark(slug) {
-        this.$store.dispatch('auth/removeBookmark', slug).then(() => {}).catch(err => {
+        this.$store.dispatch('auth/removeBookmark', slug).then(() => {
+          ElNotification({
+            title: "Success",
+            message: 'Item removed',
+            type: 'success'
+          })
+        }).catch(err => {
           ElNotification({
             title: "Error",
             message: err.response.data.message,
@@ -40,7 +46,7 @@ import { ElNotification } from 'element-plus'
       },
     },
     created() {
-    this.$store.dispatch('auth/getAddresses').then(() => {}).catch(err => {
+    this.$store.dispatch('auth/getBookmarks').then(() => {console.log(this.bookmarks);}).catch(err => {
       ElNotification({
         title: 'Error',
         message: err.response.data.message,
@@ -107,5 +113,9 @@ import { ElNotification } from 'element-plus'
 
 .favorites .inner-card {
   margin-bottom: 0.7rem;
+}
+
+img.remove {
+  cursor: pointer;
 }
 </style>

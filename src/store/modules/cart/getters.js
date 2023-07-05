@@ -4,5 +4,11 @@ export default {
   },
   cartItems(state) {
     return state.cartItems
+  },
+  orderDetails(state) {
+    return state.orderDetails
+  },
+  orders(state) {
+    return state.orders
   }
 };

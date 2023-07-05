@@ -5,7 +5,7 @@ export default {
   currentUser(state) {
     return state.currentUser
   },
-  address(state) {
-    return state.address
+  bookmarks(state) {
+    return state.bookmarks
   }
 };

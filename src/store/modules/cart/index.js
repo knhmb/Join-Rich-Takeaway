@@ -7,7 +7,9 @@ export default {
   state() {
     return {
       paymentMethod: "cash",
-      cartItems: {}
+      cartItems: {},
+      orderDetails: {},
+      orders: []
     };
   },
   getters,

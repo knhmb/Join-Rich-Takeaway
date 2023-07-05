@@ -8,7 +8,7 @@ export default {
     return {
       isLoggedIn: false,
       currentUser: {},
-      address: {}
+      bookmarks: {}
     };
   },
   getters,

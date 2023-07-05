@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="order">
+  <section class="order" v-if="dataLoaded">
     <base-container>
       <h2>{{ $t("order") }}</h2>
       <WaitingConfirmation />
@@ -24,6 +24,16 @@ export default {
     PastOrders,
     Dialog,
   },
+  data() {
+    return {
+      dataLoaded: false
+    }
+  },
+  created() {
+    this.$store.dispatch('cart/getOrders').then(() => {
+      this.dataLoaded = true
+    })
+  }
 };
 </script>
 

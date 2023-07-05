@@ -8,5 +8,13 @@ export default {
     async addToCart(context, payload) {
         const response = await axios.put('/api/v1/platform/cart/@me', payload)
         context.commit('CART_ITEMS', response.data)
+    },
+    async getOrderDetails(context, payload) {
+        const response = await axios.get(`/api/v1/platform/orders/${payload}`)
+        context.commit('SET_ORDER_DETAILS', response.data)
+    },
+    async getOrders(context) {
+        const response = await axios.get('/api/v1/platform/orders')
+        context.commit('SET_ORDERS', response.data.items)
     }
 };

@@ -2,7 +2,11 @@
 <template>
   <div class="order-dialog">
     <el-dialog v-model="dialogVisible">
-      <div class="box">
+      <template v-if="isFailed">
+        <p >Order Failed. Please try again!</p>
+      </template>
+      <template v-else>
+        <div class="box">
         <p>{{ $t("estimated_delivery_time") }}</p>
         <p class="time">11:30 - 11:45</p>
         <div class="range">
@@ -11,12 +15,14 @@
         <p class="rider-info">{{ $t("rider_picked_food") }}</p>
       </div>
       <OrderDetails />
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script>
 import OrderDetails from "@/components/order/OrderDetails";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -25,8 +31,23 @@ export default {
   data() {
     return {
       dialogVisible: true,
+      isFailed: false
     };
   },
+  created() {
+    if(this.$route.query.success === 'false') {
+      this.isFailed = true
+    } else {
+      this.isFailed = false
+    }
+    this.$store.dispatch('cart/getOrderDetails', this.$route.query.id).then(() => {}).catch(err => {
+      ElNotification({
+        title: 'Error',
+        message: err.response.data.message,
+        type: 'error'
+      })
+    })
+  }
 };
 </script>
 

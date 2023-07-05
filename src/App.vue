@@ -15,7 +15,12 @@ export default {
   },
   created() {
     const token = localStorage.getItem('accessToken')
-    this.$store.dispatch('auth/checkUser', token).then(() => {}).catch(() => {
+    this.$store.dispatch('auth/checkUser', token).then(() => {
+      this.$store.dispatch('auth/getBookmarks').then(() => {
+
+        this.$store.commit('auth/SET_USER_VALIDITY')
+      })
+    }).catch(() => {
       this.$store.dispatch('auth/logout')
     })
   }

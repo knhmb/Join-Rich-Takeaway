@@ -5,23 +5,33 @@
       <div class="order-info">
         <div class="single-info">
           <p>{{ $t("order_number") }}:</p>
-          <div class="pill">#1234</div>
+          <div class="pill">#{{ orderDetails.item.id }}</div>
         </div>
         <div class="single-info">
           <p>{{ $t("order_from") }}:</p>
-          <p class="dark">Papadam Indian Authentic</p>
+          <p class="dark">{{ orderDetails.item.restaurant }}</p>
         </div>
         <div class="single-info">
           <p>{{ $t("delivery_address") }}:</p>
           <p class="dark">
-            Address detail lorem ipsum dolor sit amet, consectetur adipiscing
-            elit...
+            {{orderDetails.item.address.snapshot.name}} - {{orderDetails.item.address.snapshot.building}} - {{orderDetails.item.address.snapshot.unit}}
           </p>
         </div>
       </div>
       <div class="order-summary">
         <div class="first-section">
-          <div class="item">
+          <div class="item" v-for="order in orderDetails.item.products" :key="order">
+            <div class="top">
+              <div class="left">
+                <span>{{order.quantity}}x</span>
+                <span>{{ order.product }}</span>
+              </div>
+              <div class="right">
+                <p>HK$ {{ order.unitPrice }}</p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="item">
             <div class="top">
               <div class="left">
                 <span>1x</span>
@@ -42,37 +52,36 @@
                 <p>HK$ 58.0</p>
               </div>
             </div>
-          </div>
-          <div class="item">
-            <div class="top">
-              <div class="left">
-                <span>1x</span>
-                <span>Product name</span>
-              </div>
-              <div class="right">
-                <p>HK$ 58.0</p>
-              </div>
-            </div>
-          </div>
+          </div> -->
         </div>
         <div class="second-section">
           <div class="subtotal">
             <p class="grey">{{ $t("subtotal") }}</p>
-            <p class="grey">HK$ 174.0</p>
+            <p class="grey">HK$ {{ orderDetails.item.subtotal }}</p>
           </div>
           <div class="delivery-fee">
             <p class="grey">{{ $t("delivery_fee") }}</p>
-            <p class="grey">HK$ 15.0</p>
+            <p class="grey">HK$ {{ orderDetails.item.deliveryFee }}</p>
           </div>
         </div>
         <div class="total">
           <p>{{ $t("total") }}</p>
-          <p>HK$ 189.0</p>
+          <p>HK$ {{ orderDetails.item.subtotal + orderDetails.item.deliveryFee }}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    computed: {
+      orderDetails() {
+        return this.$store.getters['cart/orderDetails']
+      }
+    }
+  }
+</script>
 
 <style scoped>
 .order-details {
